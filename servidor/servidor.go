@@ -8,7 +8,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
-	pb "Lab3/proto"
+	pb "Lab3_SD/proto"
 )
 
 var (
