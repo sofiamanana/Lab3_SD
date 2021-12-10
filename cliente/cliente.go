@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	pb "/lab3"
+	pb "/Lab3_SD/proto"
 )
 
 const (
