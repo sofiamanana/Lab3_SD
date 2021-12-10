@@ -8,11 +8,11 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
-	pb "/Lab3_SD/proto"
+	pb "Lab3/proto"
 )
 
 var (
-	port = flag.Int("port", 8080, "The server port")
+	port = flag.Int("port", 50051, "The server port")
 )
 
 // server is used to implement helloworld.GreeterServer.

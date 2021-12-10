@@ -3,7 +3,7 @@ syntax = "proto3";
 
 package helloworld;
 
-option go_package = "/lab3";
+option go_package = "Lab3/proto";
 
 
 // The greeting service definition.
