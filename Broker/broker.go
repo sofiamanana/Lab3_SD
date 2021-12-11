@@ -52,12 +52,10 @@ func (inf *Server1) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Rediri
 	if (fulcrum ==1){ //ip del dist29 10.6.40.169
 		ip = "10.6.40.169"
 		return &pb.Redirigido{Valor: ip}, nil
-	}
-	else if (fulcrum = 2){ //ip del dist30 10.6.40.170
+	} else if (fulcrum = 2){ //ip del dist30 10.6.40.170
 		ip = "10.6.40.170"
 		return &pb.Redirigido{Valor: ip}, nil
-	}
-	else { //ip del dist31 10.6.40.171
+	} else { //ip del dist31 10.6.40.171
 		ip = "10.6.40.171"
 		return &pb.Redirigido{Valor: ip}, nil
 	}
