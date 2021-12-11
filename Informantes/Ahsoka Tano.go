@@ -79,20 +79,20 @@ func main() {
 				if err_f1 != nil {
 					log.Fatalf("Error when calling AddCity: %s", err_f1)
 				}
-				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.x)
+				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
 
 			} else if response.Valor == "10.6.40.170" { //fulcrum2
 				res_fulcrum2, err_f2 := fulcrum2.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
 				if err_f2 != nil {
 					log.Fatalf("Error when calling AddCity: %s", err_f2)
 				}
-				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.x)
+				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
 			} else { //fulcrum 3
 				res_fulcrum3, err_f3 := fulcrum3.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
 				if err_f3 != nil {
 					log.Fatalf("Error when calling AddCity: %s", err_f3)
 				}
-				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.x)
+				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
 
 			}
 			//aquí debería enviar los datos al fulcrum de response.valor
