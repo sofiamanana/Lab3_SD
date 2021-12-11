@@ -21,6 +21,7 @@ func main(){
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}
+	defer conn.Close()
 	c := pb.NewInformanteBrokerClient(conn)
 
 	log.Printf("¿Qué acción desea realizar?:\n")
@@ -48,7 +49,7 @@ func main(){
 		fmt.Scan(&rebeldes)
 		
 	}
-	defer conn.Close()	 //esta conexión debería cerrarse cuando el informante no quiera hacer nada más?
+	
 }
 
 
