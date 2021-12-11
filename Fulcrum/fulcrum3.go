@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -16,6 +15,7 @@ type Server4 struct {
 	pb.UnimplementedInformanteFulcrumServer
 }
 
+/*
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor int) {
 	file, err := os.Open(nombre_planeta + ".txt")
 	if err != nil {
@@ -43,6 +43,7 @@ func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string)
 		fmt.Println(scanner.Bytes())
 	}
 }
+*/
 
 func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
