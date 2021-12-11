@@ -2,11 +2,8 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
-	"net"
-	"os"
 
 	"google.golang.org/grpc"
 	pb "Lab3_SD/proto"
@@ -32,18 +29,22 @@ func main(){
 	log.Printf("[3] Actualizar número de rebeldes de ciudad.\n")
 	log.Printf("[4] Borrar una ciudad.\n")
 	log.Printf("[5] No quiero hacer ni una wea más.\n")
+	var opcion int32
 	fmt.Scan(&opcion)
 	if (opcion==1){
-		response, err := c.QuieroHacer(context.Background(), &pb.Comando{comando: "AddCity"})
+		response, err := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "AddCity"})
 		if err != nil {
 		log.Fatalf("Error when calling QuieroHacer: %s", err)
 		}
-		log.Printf("Respuesta del Lider: %s", response.valor)
+		log.Printf("Respuesta del Lider: %s", response.Valor)
 		log.Printf("¿Cuál es el nombre del planeta?:\n")
+		var planeta string
 		fmt.Scan(&planeta)
 		log.Printf("¿Cuál es el nombre de la ciudad?:\n")
+		var ciudad string
 		fmt.Scan(&ciudad)
 		log.Printf("¿Cuántos rebeldes?:\n")
+		var rebeldes int32
 		fmt.Scan(&rebeldes)
 		
 	}

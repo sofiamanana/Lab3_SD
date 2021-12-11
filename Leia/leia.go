@@ -2,10 +2,7 @@ package main
 
 import (
 	"context"
-	"flag"
-	"fmt"
 	"log"
-	"net"
 
 	"google.golang.org/grpc"
 	pb "Lab3_SD/proto"
@@ -24,5 +21,5 @@ func main(){
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	log.Printf("Respuesta del Broker: %s", response.Body)
+	log.Printf("Respuesta del Broker: %s", response.Num)
 }
