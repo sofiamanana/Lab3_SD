@@ -20,7 +20,7 @@ func main(){
 	//Comienza conexion con el broker
 	log.Printf("Informante Ahsoka Tano iniciada. \n")
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial("10.6.40.169:9000", grpc.WithInsecure()) //Conexión a Broker
+	conn, err := grpc.Dial("10.6.40.172:9050", grpc.WithInsecure()) //Conexión a Broker
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}

@@ -101,3 +101,175 @@ var Greeter_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "helloworld.proto",
 }
+
+// NumberRebelsClient is the client API for NumberRebels service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type NumberRebelsClient interface {
+	GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
+}
+
+type numberRebelsClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewNumberRebelsClient(cc grpc.ClientConnInterface) NumberRebelsClient {
+	return &numberRebelsClient{cc}
+}
+
+func (c *numberRebelsClient) GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
+	out := new(Numero)
+	err := c.cc.Invoke(ctx, "/helloworld.NumberRebels/GetNumberRebels", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// NumberRebelsServer is the server API for NumberRebels service.
+// All implementations must embed UnimplementedNumberRebelsServer
+// for forward compatibility
+type NumberRebelsServer interface {
+	GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error)
+	mustEmbedUnimplementedNumberRebelsServer()
+}
+
+// UnimplementedNumberRebelsServer must be embedded to have forward compatible implementations.
+type UnimplementedNumberRebelsServer struct {
+}
+
+func (UnimplementedNumberRebelsServer) GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNumberRebels not implemented")
+}
+func (UnimplementedNumberRebelsServer) mustEmbedUnimplementedNumberRebelsServer() {}
+
+// UnsafeNumberRebelsServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to NumberRebelsServer will
+// result in compilation errors.
+type UnsafeNumberRebelsServer interface {
+	mustEmbedUnimplementedNumberRebelsServer()
+}
+
+func RegisterNumberRebelsServer(s grpc.ServiceRegistrar, srv NumberRebelsServer) {
+	s.RegisterService(&NumberRebels_ServiceDesc, srv)
+}
+
+func _NumberRebels_GetNumberRebels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlanetaCiudad)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NumberRebelsServer).GetNumberRebels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.NumberRebels/GetNumberRebels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NumberRebelsServer).GetNumberRebels(ctx, req.(*PlanetaCiudad))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// NumberRebels_ServiceDesc is the grpc.ServiceDesc for NumberRebels service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var NumberRebels_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.NumberRebels",
+	HandlerType: (*NumberRebelsServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetNumberRebels",
+			Handler:    _NumberRebels_GetNumberRebels_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "helloworld.proto",
+}
+
+// InformanteBrokerClient is the client API for InformanteBroker service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type InformanteBrokerClient interface {
+	QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error)
+}
+
+type informanteBrokerClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewInformanteBrokerClient(cc grpc.ClientConnInterface) InformanteBrokerClient {
+	return &informanteBrokerClient{cc}
+}
+
+func (c *informanteBrokerClient) QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error) {
+	out := new(Redirigido)
+	err := c.cc.Invoke(ctx, "/helloworld.InformanteBroker/QuieroHacer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// InformanteBrokerServer is the server API for InformanteBroker service.
+// All implementations must embed UnimplementedInformanteBrokerServer
+// for forward compatibility
+type InformanteBrokerServer interface {
+	QuieroHacer(context.Context, *Comando) (*Redirigido, error)
+	mustEmbedUnimplementedInformanteBrokerServer()
+}
+
+// UnimplementedInformanteBrokerServer must be embedded to have forward compatible implementations.
+type UnimplementedInformanteBrokerServer struct {
+}
+
+func (UnimplementedInformanteBrokerServer) QuieroHacer(context.Context, *Comando) (*Redirigido, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuieroHacer not implemented")
+}
+func (UnimplementedInformanteBrokerServer) mustEmbedUnimplementedInformanteBrokerServer() {}
+
+// UnsafeInformanteBrokerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to InformanteBrokerServer will
+// result in compilation errors.
+type UnsafeInformanteBrokerServer interface {
+	mustEmbedUnimplementedInformanteBrokerServer()
+}
+
+func RegisterInformanteBrokerServer(s grpc.ServiceRegistrar, srv InformanteBrokerServer) {
+	s.RegisterService(&InformanteBroker_ServiceDesc, srv)
+}
+
+func _InformanteBroker_QuieroHacer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Comando)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InformanteBrokerServer).QuieroHacer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.InformanteBroker/QuieroHacer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InformanteBrokerServer).QuieroHacer(ctx, req.(*Comando))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// InformanteBroker_ServiceDesc is the grpc.ServiceDesc for InformanteBroker service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var InformanteBroker_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.InformanteBroker",
+	HandlerType: (*InformanteBrokerServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "QuieroHacer",
+			Handler:    _InformanteBroker_QuieroHacer_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "helloworld.proto",
+}

@@ -44,7 +44,7 @@ func (s *Server) QuieroHacer(ctx context.Context, in *pb.comando) (*pb.valor, er
 }
 
 func ServerInformante(){ //Conexión para conectar este broker (servidor) al informante (cliente)
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9001))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9050))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

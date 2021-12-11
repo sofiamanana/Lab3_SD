@@ -13,7 +13,7 @@ service Greeter {
 }
 
 service NumberRebels{ //servicio para que Leia mande mensajes a Broker
-  rpc GetNumberRebels(PlanetaCiudad) returns (Numero)
+  rpc GetNumberRebels(PlanetaCiudad) returns (Numero);
 }
 
 message PlanetaCiudad {
