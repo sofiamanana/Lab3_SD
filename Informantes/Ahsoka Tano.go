@@ -19,37 +19,33 @@ func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
 	return
 }
 
-func ConexionFulcrum1() { //esta es local
-	var conn1 *grpc.ClientConn
+func main() {
+	//--------------CONEXIONES FULCRUM ------------
+	var conn1 *grpc.ClientConn //FULCRUM 1
 	conn1, err1 := grpc.Dial("localhost:9060", grpc.WithInsecure())
 	if err1 != nil {
 		log.Fatalf("did not connect: %s", err1)
 	}
 	defer conn1.Close()
-	fulcrum1 := pb.NewInformanteBrokerClient(conn1)
-}
+	fulcrum1 := pb.NewInformanteFulcrumClient(conn1)
 
-func ConexionFulcrum2() { //esta es a dist30
-	var conn2 *grpc.ClientConn
+	var conn2 *grpc.ClientConn //FULCRUM 2
 	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
 	if err2 != nil {
 		log.Fatalf("did not connect: %s", err2)
 	}
 	defer conn2.Close()
-	fulcrum2 := pb.NewInformanteBrokerClient(conn2)
-}
+	fulcrum2 := pb.NewInformanteFulcrumClient(conn2)
 
-func ConexionFulcrum3() { //esta es a dist31
-	var conn3 *grpc.ClientConn
+	var conn3 *grpc.ClientConn //FULCRUM 3
 	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure())
 	if err3 != nil {
 		log.Fatalf("did not connect: %s", err3)
 	}
 	defer conn3.Close()
-	fulcrum3 := pb.NewInformanteBrokerClient(conn3)
-}
+	fulcrum3 := pb.NewInformanteFulcrumClient(conn3)
+	// -------- FIN CONEXIONES FULCRUM ----------------
 
-func main() {
 	//Comienza conexion con el broker
 	log.Printf("Informante Ahsoka Tano iniciada. \n")
 	var conn *grpc.ClientConn
@@ -59,10 +55,6 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewInformanteBrokerClient(conn)
-
-	ConexionFulcrum1()
-	ConexionFulcrum2()
-	ConexionFulcrum3()
 
 	log.Printf("¿Qué acción desea realizar?:\n")
 	log.Printf("[1] Añadir una nueva ciudad.\n")
@@ -79,7 +71,17 @@ func main() {
 				log.Fatalf("Error when calling QuieroHacer: %s", err)
 			}
 			log.Printf("Respuesta del Broker: %s", response.Valor)
-			AddCiudad()
+			var planet, city string
+			var rebelds int32
+			planet, city, rebelds := AddCiudad()
+			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
+				res_fulcrum1, err_f1 := fulcrum1.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
+			} else if response.Valor == "10.6.40.170" { //fulcrum2
+				res_fulcrum2, err_f2 := fulcrum2.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
+			} else { //fulcrum 3
+				res_fulcrum3, err_f3 := fulcrum3.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
+
+			}
 			//aquí debería enviar los datos al fulcrum de response.valor
 		}
 	}

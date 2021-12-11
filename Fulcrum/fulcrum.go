@@ -11,7 +11,14 @@ import (
 	"google.golang.org/grpc"
 	pb "Lab3_SD/proto"
 )
-func AddCity( nombre_planeta string,nombre_ciudad string,nuevo_valor=0 int){
+
+type Server2 struct {
+	pb.UnimplementedInformanteFulcrumServer
+}
+
+
+
+func AgregarCiudad( nombre_planeta string,nombre_ciudad string,nuevo_valor=0 int){
 	file, err := os.Open( nombre_planeta +".txt")
 	if err != nil {
 		file, err := os.Create(nombre_planeta +".txt")
@@ -39,7 +46,26 @@ file, err := os.Open( nombre_planeta+"txt")
   }
 }
 
+func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
+	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
+	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
+	//var vector[3]int{0,0,0} ??
+	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
+	return &pb.Vector{x: 0, y:0, z:0}, nil
+}
 
 func main(){
-	
+	//Conexión a Informante Ahsoka
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	ahsoka := grpc.NewServer()
+
+	pb.RegisterInformanteFulcrumServer(ahsoka, &Server2{})
+	if err := ahsoka.Serve(lis); err != nil {
+		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
+	}
 }
