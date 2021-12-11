@@ -42,5 +42,5 @@ message Comando {
 
 }
 message Redirigido {  //Retornar a cual fulcrum debe conectarse
-  int32 valor = 1;
+  string valor = 1;
 }

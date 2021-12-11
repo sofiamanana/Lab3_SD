@@ -99,7 +99,7 @@ var Greeter_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "helloworld.proto",
+	Metadata: "proto/helloworld.proto",
 }
 
 // NumberRebelsClient is the client API for NumberRebels service.
@@ -185,7 +185,7 @@ var NumberRebels_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "helloworld.proto",
+	Metadata: "proto/helloworld.proto",
 }
 
 // InformanteBrokerClient is the client API for InformanteBroker service.
@@ -271,5 +271,5 @@ var InformanteBroker_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "helloworld.proto",
+	Metadata: "proto/helloworld.proto",
 }
