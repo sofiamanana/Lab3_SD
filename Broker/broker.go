@@ -49,10 +49,10 @@ func (inf *Server1) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Rediri
 	var ip string
 	log.Printf("El informante desea hacer: %s", in.Comando)
 	fulcrum = rand.Int31n(3) + 1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
-	if (fulcrum ==1){ //ip del dist29 10.6.40.169
+	if fulcrum == 1 {            //ip del dist29 10.6.40.169
 		ip = "10.6.40.169"
 		return &pb.Redirigido{Valor: ip}, nil
-	} else if (fulcrum = 2){ //ip del dist30 10.6.40.170
+	} else if fulcrum == 2 { //ip del dist30 10.6.40.170
 		ip = "10.6.40.170"
 		return &pb.Redirigido{Valor: ip}, nil
 	} else { //ip del dist31 10.6.40.171
