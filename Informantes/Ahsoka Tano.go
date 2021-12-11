@@ -19,7 +19,7 @@ func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
 	return
 }
 
-func ConexionFulcrum1(){ //esta es local
+func ConexionFulcrum1() { //esta es local
 	var conn1 *grpc.ClientConn
 	conn1, err1 := grpc.Dial("localhost:9060", grpc.WithInsecure())
 	if err1 != nil {
@@ -29,10 +29,9 @@ func ConexionFulcrum1(){ //esta es local
 	fulcrum1 := pb.NewInformanteBrokerClient(conn1)
 }
 
-
-func ConexionFulcrum2(){ //esta es a dist30
+func ConexionFulcrum2() { //esta es a dist30
 	var conn2 *grpc.ClientConn
-	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure()) 
+	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
 	if err2 != nil {
 		log.Fatalf("did not connect: %s", err2)
 	}
@@ -40,17 +39,15 @@ func ConexionFulcrum2(){ //esta es a dist30
 	fulcrum2 := pb.NewInformanteBrokerClient(conn2)
 }
 
-func ConexionFulcrum3(){ //esta es a dist31
+func ConexionFulcrum3() { //esta es a dist31
 	var conn3 *grpc.ClientConn
-	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure()) 
+	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure())
 	if err3 != nil {
 		log.Fatalf("did not connect: %s", err3)
 	}
 	defer conn3.Close()
 	fulcrum3 := pb.NewInformanteBrokerClient(conn3)
 }
-
-
 
 func main() {
 	//Comienza conexion con el broker
@@ -62,6 +59,10 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewInformanteBrokerClient(conn)
+
+	ConexionFulcrum1()
+	ConexionFulcrum2()
+	ConexionFulcrum3()
 
 	log.Printf("¿Qué acción desea realizar?:\n")
 	log.Printf("[1] Añadir una nueva ciudad.\n")
