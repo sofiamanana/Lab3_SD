@@ -37,7 +37,7 @@ func main(){
 		if err != nil {
 		log.Fatalf("Error when calling QuieroHacer: %s", err)
 		}
-		log.Printf("Respuesta del Lider: %s", response.Valor)
+		log.Printf("Respuesta del Lider: %d", response.Valor)
 		log.Printf("¿Cuál es el nombre del planeta?:\n")
 		var planeta string
 		fmt.Scan(&planeta)
