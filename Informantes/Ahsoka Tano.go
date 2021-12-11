@@ -73,7 +73,7 @@ func main() {
 			log.Printf("Respuesta del Broker: %s", response.Valor)
 			var planet, city string
 			var rebelds int32
-			planet, city, rebelds := AddCiudad()
+			planet, city, rebelds = AddCiudad()
 			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
 				res_fulcrum1, err_f1 := fulcrum1.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
 			} else if response.Valor == "10.6.40.170" { //fulcrum2
