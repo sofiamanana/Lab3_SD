@@ -67,6 +67,5 @@ func ServerInformante(){ //Conexión para conectar este broker (servidor) al inf
 
 func main(){
 	rand.Seed(time.Now().UnixNano())  //para seleccionar el server fulcrum al azar
-	ServerLeia()
 	ServerInformante()
 }
