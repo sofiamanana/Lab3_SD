@@ -19,6 +19,39 @@ func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
 	return
 }
 
+func ConexionFulcrum1(){ //esta es local
+	var conn1 *grpc.ClientConn
+	conn1, err1 := grpc.Dial("localhost:9060", grpc.WithInsecure())
+	if err1 != nil {
+		log.Fatalf("did not connect: %s", err1)
+	}
+	defer conn1.Close()
+	fulcrum1 := pb.NewInformanteBrokerClient(conn1)
+}
+
+
+func ConexionFulcrum2(){ //esta es a dist30
+	var conn2 *grpc.ClientConn
+	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure()) 
+	if err2 != nil {
+		log.Fatalf("did not connect: %s", err2)
+	}
+	defer conn2.Close()
+	fulcrum2 := pb.NewInformanteBrokerClient(conn2)
+}
+
+func ConexionFulcrum3(){ //esta es a dist31
+	var conn3 *grpc.ClientConn
+	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure()) 
+	if err3 != nil {
+		log.Fatalf("did not connect: %s", err3)
+	}
+	defer conn3.Close()
+	fulcrum3 := pb.NewInformanteBrokerClient(conn3)
+}
+
+
+
 func main() {
 	//Comienza conexion con el broker
 	log.Printf("Informante Ahsoka Tano iniciada. \n")
@@ -44,7 +77,7 @@ func main() {
 			if err != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err)
 			}
-			log.Printf("Respuesta del Broker: %d", response.Valor)
+			log.Printf("Respuesta del Broker: %s", response.Valor)
 			AddCiudad()
 			//aquí debería enviar los datos al fulcrum de response.valor
 		}

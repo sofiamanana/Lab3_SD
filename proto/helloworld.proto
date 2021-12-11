@@ -6,12 +6,7 @@ package helloworld;
 option go_package = "Lab3/proto";
 
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
-}
-
+//----------------------------------- LEIA -------------------------------------------
 service NumberRebels{ //servicio para que Leia mande mensajes a Broker
   rpc GetNumberRebels(PlanetaCiudad) returns (Numero);
 }
@@ -24,15 +19,8 @@ message Numero {
   int32 num = 1;
 }
 
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}
-
-// The response message containing the greetings
-message HelloReply {
-  string message = 1;
-}
+//-----------------------------------------------------------------------------------
+//----------------------------------- BROKER - INFORMANTE -------------------------------------------
 
 service InformanteBroker {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
     rpc QuieroHacer(Comando) returns (Redirigido) {}
@@ -44,3 +32,22 @@ message Comando {
 message Redirigido {  //Retornar a cual fulcrum debe conectarse
   string valor = 1;
 }
+//------------------------------------------------------------------------------------
+//----------------------------------- INFORMANTE - FULCRUMS --------------------------
+
+service InformanteFulcrum {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
+  rpc AddCity(Estructura) returns (Vector) {}
+}
+
+message Estructura {
+  string planeta = 1;
+  string ciudad = 2;
+  int32 rebeldes = 3;
+}
+
+message Vector{
+  string x = 1;
+  string y = 2;
+  string z = 3;
+}
+//------------------------------------------------------------------------------
