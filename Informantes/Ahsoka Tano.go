@@ -11,13 +11,10 @@ import (
 
 func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
 	log.Printf("¿Cuál es el nombre del planeta?:\n")
-	var planeta string
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad?:\n")
-	var ciudad string
 	fmt.Scan(&ciudad)
 	log.Printf("¿Cuántos rebeldes?:\n")
-	var rebeldes int32
 	fmt.Scan(&rebeldes)
 	return
 }
