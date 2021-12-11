@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -12,12 +11,20 @@ import (
 	pb "Lab3_SD/proto"
 )
 
+type Server struct {
+	pb.UnimplementedNumberRebelsServer
+}
+
+type Server1 struct {
+	pb.UnimplementedInformanteBrokerServer
+}
+
 func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
-	split := strings.Split(in.PlanetaCiudad, ",")
+	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
 	log.Printf("Leia pregunto por el planeta %s y la ciudad %s",planeta, ciudad)
-	return &pb.Numero{num: 11}, nil
+	return &pb.Numero{Num: 11}, nil
 }
 
 func ServerLeia(){
@@ -36,11 +43,11 @@ func ServerLeia(){
 
 }
 
-func (s *Server) QuieroHacer(ctx context.Context, in *pb.comando) (*pb.valor, error) { 
+func (s *Server1) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) { 
 	var fulcrum int32 = 0
-	log.Printf("El informante desea hacer: %s", in.comando)
+	log.Printf("El informante desea hacer: %s", in.Comando)
 	fulcrum = rand.Int31n(3) +1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
-	return &pb.Redirigido{valor: fulcrum}, nil
+	return &pb.Redirigido{Valor: fulcrum}, nil
 }
 
 func ServerInformante(){ //Conexión para conectar este broker (servidor) al informante (cliente)
@@ -51,7 +58,7 @@ func ServerInformante(){ //Conexión para conectar este broker (servidor) al inf
 
 	s := grpc.NewServer()
 
-	pb.RegisterInformanteBrokerServer(s, &Server{})
+	pb.RegisterInformanteBrokerServer(s, &Server1{})
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-broker: %s", err)
 	}
