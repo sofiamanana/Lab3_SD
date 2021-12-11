@@ -30,13 +30,13 @@ func main(){
 	log.Printf("[3] Actualizar número de rebeldes de ciudad.\n")
 	log.Printf("[4] Borrar una ciudad.\n")
 	log.Printf("[5] No quiero hacer ni una wea más.\n")
-	var opcion int32
-	while (opcion != 5){
+	var opcion int32 = 0
+	for ok:= true; ok; ok = (opcion!=5){
 		fmt.Scan(&opcion)
 		if (opcion==1){
 			response, err := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "AddCity"})
 			if err != nil {
-			log.Fatalf("Error when calling QuieroHacer: %s", err)
+				log.Fatalf("Error when calling QuieroHacer: %s", err)
 			}
 			log.Printf("Respuesta del Broker: %d", response.Valor)
 			log.Printf("¿Cuál es el nombre del planeta?:\n")
@@ -54,5 +54,7 @@ func main(){
 	
 	
 }
+
+
 
 
