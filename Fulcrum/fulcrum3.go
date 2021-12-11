@@ -15,32 +15,33 @@ import (
 type Server4 struct {
 	pb.UnimplementedInformanteFulcrumServer
 }
-func AgregarCiudad( nombre_planeta string,nombre_ciudad string,nuevo_valor=0 int){
-	file, err := os.Open( nombre_planeta +".txt")
+
+func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor int) {
+	file, err := os.Open(nombre_planeta + ".txt")
 	if err != nil {
-		file, err := os.Create(nombre_planeta +".txt")
+		file, err := os.Create(nombre_planeta + ".txt")
 		if err != nil {
 			log.Fatal(err)
-		  }
+		}
 	}
 	defer file.Close()
-	_, err2 := file.WriteString(nombre_planeta+" "+nombre_ciudad+" "+nuevo_valor+"/n")
+	_, err2 := file.WriteString(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "/n")
 	if err2 != nil {
 		log.Fatal(err2)
 	}
 	//fmt.Println("listo")
 }
-func UpdateName( nombre_planeta string,nombre_ciudad string,nuevo_valor string){
-file, err := os.Open( nombre_planeta+"txt")
-  if err != nil {
-    log.Fatal(err)
-  }
-  defer file.Close()
-  scanner := bufio.NewScanner(file)
-  for scanner.Scan() {
-    fmt.Println(scanner.Text())
-    fmt.Println(scanner.Bytes())
-  }
+func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	file, err := os.Open(nombre_planeta + "txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+		fmt.Println(scanner.Bytes())
+	}
 }
 
 func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
@@ -49,7 +50,7 @@ func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	return &pb.Vector{x: 0, y:0, z:0}, nil
+	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
 func main() {
