@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"rand"
+	"math/rand"
 	"net"
 	"strings"
 	"time"
