@@ -15,6 +15,9 @@ import (
 type Server4 struct {
 	pb.UnimplementedFulcrumServer
 }
+type Server5 struct {
+	pb.UnimplementedBrokerServer
+}
 
 func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
 	split := strings.Split(in.Body, ",")
@@ -53,8 +56,8 @@ func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string)
 	}
 }
 */
-/*
-func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+
+func (ahsoka2 *Server5) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
 	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
@@ -62,18 +65,31 @@ func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	return &pb.Vector{X: "0", Y: "0", Z: "0"}, nil
 }
-*/
+
 func main() {
-	//Conexión a Informante Ahsoka
+	//Conexión a Leia
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	ahsoka2 := grpc.NewServer()
+	leia := grpc.NewServer()
 
-	pb.RegisterFulcrumServer(ahsoka2, &Server4{})
-	if err := ahsoka2.Serve(lis); err != nil {
+	pb.RegisterFulcrumServer(leia, &Server4{})
+	if err := leia.Serve(lis); err != nil {
 		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
+	}
+
+	//Conexión a Informante Ahsoka
+	lis2, err2 := net.Listen("tcp", fmt.Sprintf(":%d", 9080))
+	if err2 != nil {
+		log.Fatalf("failed to listen: %v", err2)
+	}
+
+	ahsoka1 := grpc.NewServer()
+
+	pb.RegisterBrokerServer(ahsoka1, &Server5{})
+	if err2 := ahsoka1.Serve(lis); err2 != nil {
+		log.Fatalf("falló la conexión informante-fulcrum: %s", err2)
 	}
 }
