@@ -44,7 +44,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	}
 	
 	n_r, _ := strconv.Atoi(rebeldes)
-	rebeldes := "holi"
+	rebeldes = "holi"
 	return &pb.Numero{Num: int64(n_r)}, nil
 }
 
