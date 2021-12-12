@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net"
+	"strings"
 	//"os"
 
 	pb "Lab3_SD/proto"
@@ -15,7 +16,7 @@ type Server4 struct {
 	pb.UnimplementedBrokerServer
 }
 
-func (s *Server) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
+func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
