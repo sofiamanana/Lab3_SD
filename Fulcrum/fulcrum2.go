@@ -6,28 +6,29 @@ import (
 	"io/ioutil"
 	"log"
 	"net"
-	"strings"
+	//"strings"
 
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
 )
 
 type Server3 struct {
-	pb.UnimplementedInformanteFulcrumServer
+	pb.UnimplementedBrokerServer
 }
 
+/*
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor int) {
 	content,err:=ioutill.ReadFile(filename:nombre_planeta+".txt")
 	if err!=nil{
 		err2:=ioutill.WriteFile(nombre_planeta+".txt",nombre_planeta+" "+nombre_ciudad+" "+nuevo_valor,0644)
 	}
-	content=append(content,nombre_planeta+" "+nombre_ciudad+" "+nuevo_valor)
+	content=append(content,([]byte(nombre_planeta)+[]byte(" ")+[]byte(nombre_ciudad)+[]byte(" ")+[]byte(nuevo_valor))...,0644)
 	err=ioutill.WriteFile(nombre_planeta+".txt",content,0644)
 	if err!=nil{
 		log.Fatal(err)
 	}
 }
-
+*/
 /*
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
 	file, err := os.Open(nombre_planeta + "txt")

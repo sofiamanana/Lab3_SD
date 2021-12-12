@@ -8,7 +8,7 @@ import (
 	//"os"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
-	"strings"
+	//"strings"
 )
 
 type Server2 struct {
