@@ -89,7 +89,7 @@ func main() {
 	ahsoka1 := grpc.NewServer()
 
 	pb.RegisterBrokerServer(ahsoka1, &Server5{})
-	if err2 := ahsoka1.Serve(lis); err2 != nil {
+	if err2 := ahsoka1.Serve(lis2); err2 != nil {
 		log.Fatalf("falló la conexión informante-fulcrum: %s", err2)
 	}
 }
