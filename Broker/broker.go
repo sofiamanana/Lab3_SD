@@ -63,7 +63,7 @@ func ServerInformante() { //Conexión para conectar este broker (servidor) al in
 
 	inf := grpc.NewServer()
 
-	pb.RegisterBrokerServer(inf, &Server1{})
+	pb.RegisterBrokerServer(inf, &Server{})
 	if err := inf.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-broker: %s", err)
 	}

@@ -6,6 +6,7 @@ import (
 	"io/ioutill"
 	"log"
 	"net"
+	"strings"
 
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
