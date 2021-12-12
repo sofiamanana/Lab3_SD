@@ -17,20 +17,31 @@ type Server3 struct {
 	pb.UnimplementedFulcrumServer
 }
 
-func AddCity(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
-	content, err := ioutil.ReadFile(nombre_planeta + ".txt")
+func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	content, err := ioutil.ReadFile("Fulcrum2/"+nombre_planeta + ".txt")
 	if err != nil {
-		ioutil.WriteFile(nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
-		return
+		ioutil.WriteFile("Fulcrum2/"+nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Fulcrum2/"+nombre_planeta+".txt", content, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
-	err = ioutil.WriteFile(nombre_planeta+".txt", content, 0644)
-	if err != nil {
-		log.Fatal(err)
+	content2, err2 := ioutil.ReadFile("Fulcrum2/"+"Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("AddCitty " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("AddCitty " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
 	}
 }
+
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
-	file, err := os.Open(nombre_planeta + ".txt")
+	file, err := os.Open("Fulcrum2/"+nombre_planeta + ".txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -46,14 +57,24 @@ func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string)
 		}
 	}
 	log.Println(texto)
-	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	err = ioutil.WriteFile("Fulcrum2/"+nombre_planeta+".txt", []byte(texto), 0644)
 	if err != nil {
 		log.Fatal(err)
+	}
+	content2, err2 := ioutil.ReadFile("Fulcrum2/"+"Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("UpdateName " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("UpdateName " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
 	}
 }
 
 func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
-	file, err := os.Open(nombre_planeta + ".txt")
+	file, err := os.Open("Fulcrum2/"+nombre_planeta + ".txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,14 +89,24 @@ func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor strin
 			texto += scanner.Text() + "\n"
 		}
 	}
-	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	err = ioutil.WriteFile("Fulcrum2/"+nombre_planeta+".txt", []byte(texto), 0644)
 	if err != nil {
 		log.Fatal(err)
+	}
+	content2, err2 := ioutil.ReadFile("Fulcrum2/"+"Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("UpdateNumber " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("UpdateNumber " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
 	}
 }
 
 func DeleteCity(nombre_planeta string, nombre_ciudad string) {
-	file, err := os.Open(nombre_planeta + ".txt")
+	file, err := os.Open("Fulcrum2/"+nombre_planeta + ".txt")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -90,11 +121,22 @@ func DeleteCity(nombre_planeta string, nombre_ciudad string) {
 			texto += scanner.Text() + "\n"
 		}
 	}
-	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	err = ioutil.WriteFile("Fulcrum2/"+nombre_planeta+".txt", []byte(texto), 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
+	content2, err2 := ioutil.ReadFile("Fulcrum2/"+"Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+	}
 }
+
 
 func (ahsoka1 *Server3) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
