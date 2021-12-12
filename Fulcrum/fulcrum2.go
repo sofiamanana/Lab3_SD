@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutill"
+	"io/ioutil"
 	"log"
 	"net"
 	"strings"
