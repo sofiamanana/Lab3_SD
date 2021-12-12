@@ -130,7 +130,7 @@ func main() {
 				log.Fatalf("Error when calling QuieroHacer: %s", err2)
 			}
 			log.Printf("Respuesta del Broker: %s", response2.Valor)
-			planet, city, new_city = UpdateCiudad()
+			//planet, city, new_city = UpdateCiudad()
 
 		} else if (opcion == 3) { //Actualizar rebeldes
 			var planet, city, new_rebeldes string
@@ -139,7 +139,7 @@ func main() {
 				log.Fatalf("Error when calling QuieroHacer: %s", err3)
 			}
 			log.Printf("Respuesta del Broker: %s", response3.Valor)
-			planet, city, new_rebeldes = UpdateRebeldes()
+			//planet, city, new_rebeldes = UpdateRebeldes()
 		} else{
 			var planet, city string
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
@@ -147,7 +147,7 @@ func main() {
 				log.Fatalf("Error when calling QuieroHacer: %s", err4)
 			}
 			log.Printf("Respuesta del Broker: %s", response4.Valor)
-			planet, city = DeleteCiudad()
+			//planet, city = DeleteCiudad()
 		}
 	}
 
