@@ -44,7 +44,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	}
 	
 	n_r, _ := strconv.Atoi(rebeldes)
-	return &pb.Numero{Num: int32(n_r)}, nil
+	return &pb.Numero{Num: int64(n_r)}, nil
 }
 
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
