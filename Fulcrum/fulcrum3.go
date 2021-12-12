@@ -24,35 +24,161 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	return &pb.Numero{Num: 5}, nil
 }
 
-/*
-func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor int) {
-	file, err := os.Open(nombre_planeta + ".txt")
+func AddCity(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	content, err := ioutil.ReadFile(nombre_planeta + ".txt")
 	if err != nil {
-		file, err := os.Create(nombre_planeta + ".txt")
-		if err != nil {
-			log.Fatal(err)
-		}
+		ioutil.WriteFile(nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+		return
 	}
-	defer file.Close()
-	_, err2 := file.WriteString(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "/n")
-	if err2 != nil {
-		log.Fatal(err2)
+	content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+	err = ioutil.WriteFile(nombre_planeta+".txt", content, 0644)
+	if err != nil {
+		log.Fatal(err)
 	}
-	//fmt.Println("listo")
 }
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
-	file, err := os.Open(nombre_planeta + "txt")
+	file, err := os.Open(nombre_planeta + ".txt")
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer file.Close()
+	var texto string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-		fmt.Println(scanner.Bytes())
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			texto += string(textarray[0] + " " + nuevo_valor + " " + textarray[2] + "\n")
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	log.Println(texto)
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
-*/
+
+func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			texto += string(textarray[0] + " " + textarray[1] + " " + nuevo_valor + "\n")
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func DeleteCity(nombre_planeta string, nombre_ciudad string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			continue
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}func AddCity(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	content, err := ioutil.ReadFile(nombre_planeta + ".txt")
+	if err != nil {
+		ioutil.WriteFile(nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+		return
+	}
+	content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+	err = ioutil.WriteFile(nombre_planeta+".txt", content, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			texto += string(textarray[0] + " " + nuevo_valor + " " + textarray[2] + "\n")
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	log.Println(texto)
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			texto += string(textarray[0] + " " + textarray[1] + " " + nuevo_valor + "\n")
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func DeleteCity(nombre_planeta string, nombre_ciudad string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+		if textarray[1] == nombre_ciudad {
+			continue
+		} else {
+			texto += scanner.Text() + "\n"
+		}
+	}
+	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 
 func (ahsoka1 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
