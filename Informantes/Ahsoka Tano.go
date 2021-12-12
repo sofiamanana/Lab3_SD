@@ -19,7 +19,7 @@ func AddCiudad() (planeta string, ciudad string, rebeldes string) {
 	return
 }
 
-func UpdateCiudad(planeta string, ciudad string, nueva_city string){
+func UpdateCiudad()(planeta string, ciudad string, nueva_city string){
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
@@ -29,7 +29,7 @@ func UpdateCiudad(planeta string, ciudad string, nueva_city string){
 	return
 }
 
-func UpdateRebeldes(planeta string, ciudad string, new_rebeldes string){
+func UpdateRebeldes()(planeta string, ciudad string, new_rebeldes string){
 	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿En qué ciudad?:\n")
@@ -39,7 +39,7 @@ func UpdateRebeldes(planeta string, ciudad string, new_rebeldes string){
 	return
 }
 
-func DeleteCiudad(planeta string, ciudad string){
+func DeleteCiudad()(planeta string, ciudad string){
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a eliminar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a eliminar?:\n")

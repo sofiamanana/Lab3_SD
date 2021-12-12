@@ -113,7 +113,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 
 func main() {
 	//Conexión a Informante Ahsoka
-	vector := make(map[string][]int)
+	Vector["Chilito"] = []int{0,0,0}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
