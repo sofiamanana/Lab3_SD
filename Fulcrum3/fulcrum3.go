@@ -43,6 +43,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 		}
 	}
 	i, _ := strconv.Atoi(fmt.Sprintf("%s", rebeldes))
+	i = int32(i)
 	return &pb.Numero{Num: i}, nil
 }
 
