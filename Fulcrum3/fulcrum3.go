@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strconv"
 	"io/ioutil"
 	"bufio"
 	pb "Lab3_SD/proto"
@@ -41,9 +42,8 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 			texto += scanner.Text() + "\n"
 		}
 	}
-	var aux int32
-	aux = int32(aux)
-	return &pb.Numero{Num: aux}, nil
+	i, _ := strconv.Atoi(fmt.Sprintf("%s", rebeldes))
+	return &pb.Numero{Num: i}, nil
 }
 
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
