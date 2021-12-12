@@ -27,7 +27,7 @@ func main() {
 		log.Fatalf("did not connect: %s", err1)
 	}
 	defer conn1.Close()
-	fulcrum1 := pb.NewBrokerClient(conn1)
+	fulcrum1 := pb.NewFulcrumClient(conn1)
 
 	var conn2 *grpc.ClientConn //FULCRUM 2
 	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
@@ -35,7 +35,7 @@ func main() {
 		log.Fatalf("did not connect: %s", err2)
 	}
 	defer conn2.Close()
-	fulcrum2 := pb.NewBrokerClient(conn2)
+	fulcrum2 := pb.NewFulcrumClient(conn2)
 
 	var conn3 *grpc.ClientConn //FULCRUM 3
 	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure())
@@ -43,7 +43,7 @@ func main() {
 		log.Fatalf("did not connect: %s", err3)
 	}
 	defer conn3.Close()
-	fulcrum3 := pb.NewBrokerClient(conn3)
+	fulcrum3 := pb.NewFulcrumClient(conn3)
 	// -------- FIN CONEXIONES FULCRUM ----------------
 
 	//Comienza conexion con el broker
