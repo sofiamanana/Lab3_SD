@@ -8,6 +8,7 @@ import (
 	"os"
 	"io/ioutil"
 	"bufio"
+	"strconv"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
 	"strings"
@@ -21,6 +22,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
+
 	var rebeldes string
 	log.Printf("Broker pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 	//leer archivo
@@ -40,7 +42,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 			texto += scanner.Text() + "\n"
 		}
 	}
-	return &pb.Numero{Num: int(rebeldes)}, nil
+	return &pb.Numero{Num: int(strconv.Atoi(rebeldes))}, nil
 }
 
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
