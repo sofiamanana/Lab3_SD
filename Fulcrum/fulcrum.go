@@ -11,11 +11,13 @@ import (
 	//"strings"
 )
 
+var Vector = make(map[string][]int)
+
 type Server2 struct {
 	pb.UnimplementedFulcrumServer
 }
 
-func AddCity(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
 	content, err := ioutil.ReadFile(nombre_planeta + ".txt")
 	if err != nil {
 		ioutil.WriteFile(nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
@@ -94,17 +96,22 @@ func DeleteCity(nombre_planeta string, nombre_ciudad string) {
 	}
 }
 
+
 func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
 	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	return &pb.Vector{X: "0", Y: "0", Z: "0"}, nil
+	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
+	M[in.Planeta][0]++
+	return &pb.Vector{X: M[in.Planeta][0], Y: M[in.Planeta][1], Z: M[in.Planeta][2]}, nil
 }
+
 
 func main() {
 	//Conexión a Informante Ahsoka
+	vector := make(map[string][]int)
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)

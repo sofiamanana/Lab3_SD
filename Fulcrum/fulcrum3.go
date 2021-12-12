@@ -186,23 +186,10 @@ func (ahsoka1 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	return &pb.Vector{X: "0", Y: "0", Z: "0"}, nil
+	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-func ConexionLeia() {
-	//Conexión a Leia
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
-	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
-	}
 
-	leia := grpc.NewServer()
-
-	pb.RegisterFulcrumServer(leia, &Server4{})
-	if err := leia.Serve(lis); err != nil {
-		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
-	}
-}
 
 func main() {
 	//Conexión a Leia

@@ -10,17 +10,6 @@ service Broker {
   rpc QuieroHacer(Comando) returns (Redirigido) {}
 }
 
-
-//----------------------------------- LEIA -------------------------------------------
-//service NumberRebels{ //servicio para que Leia mande mensajes a Broker
-  //rpc GetNumberRebels(PlanetaCiudad) returns (Numero);
-//}
-
-service Fulcrum {
-  rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
-  rpc AddCity(Estructura) returns (Vector) {}
-}
-
 message PlanetaCiudad {
   string body = 1;
 }
@@ -28,13 +17,6 @@ message PlanetaCiudad {
 message Numero {
   int32 num = 1;
 }
-
-//-----------------------------------------------------------------------------------
-//----------------------------------- BROKER - INFORMANTE -------------------------------------------
-
-//service InformanteBroker {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
-  //  rpc QuieroHacer(Comando) returns (Redirigido) {}
-//}
 message Comando {
   string comando = 1;
 
@@ -42,23 +24,28 @@ message Comando {
 message Redirigido {  //Retornar a cual fulcrum debe conectarse
   string valor = 1;
 }
-//------------------------------------------------------------------------------------
-//----------------------------------- INFORMANTE - FULCRUMS --------------------------
 
-//service InformanteFulcrum {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
-  //rpc AddCity(Estructura) returns (Vector) {}
-//}
+
+//------------------------------------------------------------------
+
+service Fulcrum {
+  rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
+  rpc AddCity(Estructura) returns (Vector) {}
+  rpc UpdateName(Estructura) returns (Vector) {}
+  rpc UpdateNumber(Estructura) returns (Vector) {}
+}
+
 
 message Estructura {
   string planeta = 1;
   string ciudad = 2;
-  int32 rebeldes = 3;
+  string rebeldes = 3;
 }
 
 message Vector{
-  string x = 1;
-  string y = 2;
-  string z = 3;
+  int32 x = 1;
+  int32 y = 2;
+  int32 z = 3;
 }
-//------------------------------------------------------------------------------
+
 

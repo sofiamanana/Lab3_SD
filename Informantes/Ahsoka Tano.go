@@ -19,6 +19,35 @@ func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
 	return
 }
 
+func UpdateCiudad(planeta string, ciudad string, nueva_city string){
+	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
+	fmt.Scan(&planeta)
+	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
+	fmt.Scan(&ciudad)
+	log.Printf("¿Cuál es el nuevo nombre de la ciudad a cambiar?:\n")
+	fmt.Scan(&nueva_city)
+	return
+}
+
+func UpdateRebeldes(planeta string, ciudad string, new_rebeldes int32){
+	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
+	fmt.Scan(&planeta)
+	log.Printf("¿En qué ciudad?:\n")
+	fmt.Scan(&ciudad)
+	log.Printf("¿Cuál es el nuevo número de rebeldes en la ciudad?:\n")
+	fmt.Scan(&new_rebeldes)
+	return
+}
+
+func DeleteCiudad(planeta string, ciudad string){
+	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a eliminar?:\n")
+	fmt.Scan(&planeta)
+	log.Printf("¿Cuál es el nombre de la ciudad a eliminar?:\n")
+	fmt.Scan(&ciudad)
+	return
+}
+
+
 func main() {
 	//--------------CONEXIONES FULCRUM ------------
 	var conn1 *grpc.ClientConn //FULCRUM 1
