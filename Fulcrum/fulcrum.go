@@ -23,12 +23,22 @@ func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor stri
 	content, err := ioutil.ReadFile(nombre_planeta + ".txt")
 	if err != nil {
 		ioutil.WriteFile(nombre_planeta+".txt", ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
-		return
+	} else {
+		content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile(nombre_planeta+".txt", content, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
-	content = append(content, ([]byte(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
-	err = ioutil.WriteFile(nombre_planeta+".txt", content, 0644)
-	if err != nil {
-		log.Fatal(err)
+	content2, err2 := ioutil.ReadFile("Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("AddCitty " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("AddCitty " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
 	}
 }
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
@@ -52,6 +62,16 @@ func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string)
 	if err != nil {
 		log.Fatal(err)
 	}
+	content2, err2 := ioutil.ReadFile("Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("UpdateName " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("UpdateName " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+	}
 }
 
 func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
@@ -74,6 +94,16 @@ func UpdateNumber(nombre_planeta string, nombre_ciudad string, nuevo_valor strin
 	if err != nil {
 		log.Fatal(err)
 	}
+	content2, err2 := ioutil.ReadFile("Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("UpdateNumber " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("UpdateNumber " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
+	}
 }
 
 func DeleteCity(nombre_planeta string, nombre_ciudad string) {
@@ -95,6 +125,16 @@ func DeleteCity(nombre_planeta string, nombre_ciudad string) {
 	err = ioutil.WriteFile(nombre_planeta+".txt", []byte(texto), 0644)
 	if err != nil {
 		log.Fatal(err)
+	}
+	content2, err2 := ioutil.ReadFile("Log" + nombre_planeta + ".txt")
+	if err2 != nil {
+		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+	} else {
+		content2 = append(content2, ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		err = ioutil.WriteFile("Log"+nombre_planeta+".txt", content2, 0644)
+		if err2 != nil {
+			log.Fatal(err2)
+		}
 	}
 }
 
