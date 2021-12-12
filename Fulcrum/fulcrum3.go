@@ -53,7 +53,7 @@ func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string)
 	}
 }
 */
-
+/*
 func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
@@ -62,7 +62,7 @@ func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	return &pb.Vector{X: "0", Y: "0", Z: "0"}, nil
 }
-
+*/
 func main() {
 	//Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
@@ -72,7 +72,7 @@ func main() {
 
 	ahsoka2 := grpc.NewServer()
 
-	pb.RegisterBrokerServer(ahsoka2, &Server4{})
+	pb.RegisterFulcrumServer(ahsoka2, &Server4{})
 	if err := ahsoka2.Serve(lis); err != nil {
 		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
 	}
