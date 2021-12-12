@@ -127,9 +127,9 @@ func DeleteCity(nombre_planeta string, nombre_ciudad string) {
 	}
 	content2, err2 := ioutil.ReadFile("Fulcrum2/"+"Log" + nombre_planeta + ".txt")
 	if err2 != nil {
-		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n")), 0644)
+		ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad +  "\n")), 0644)
 	} else {
-		content2 = append(content2, ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "\n"))...)
+		content2 = append(content2, ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + "\n"))...)
 		err = ioutil.WriteFile("Fulcrum2/"+"Log"+nombre_planeta+".txt", content2, 0644)
 		if err2 != nil {
 			log.Fatal(err2)
