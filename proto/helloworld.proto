@@ -5,10 +5,20 @@ package helloworld;
 
 option go_package = "Lab3/proto";
 
+service Broker {
+  rpc GetNumberRebels(PlanetaCiudad) returns (Numero) {}
+  rpc QuieroHacer(Comando) returns (Redirigido) {}
+  rpc AddCity(Estructura) returns (Vector) {}
+}
+
 
 //----------------------------------- LEIA -------------------------------------------
-service NumberRebels{ //servicio para que Leia mande mensajes a Broker
-  rpc GetNumberRebels(PlanetaCiudad) returns (Numero);
+//service NumberRebels{ //servicio para que Leia mande mensajes a Broker
+  //rpc GetNumberRebels(PlanetaCiudad) returns (Numero);
+//}
+
+service Fulcrum {
+  rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
 }
 
 message PlanetaCiudad {
@@ -22,9 +32,9 @@ message Numero {
 //-----------------------------------------------------------------------------------
 //----------------------------------- BROKER - INFORMANTE -------------------------------------------
 
-service InformanteBroker {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
-    rpc QuieroHacer(Comando) returns (Redirigido) {}
-}
+//service InformanteBroker {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
+  //  rpc QuieroHacer(Comando) returns (Redirigido) {}
+//}
 message Comando {
   string comando = 1;
 
@@ -35,9 +45,9 @@ message Redirigido {  //Retornar a cual fulcrum debe conectarse
 //------------------------------------------------------------------------------------
 //----------------------------------- INFORMANTE - FULCRUMS --------------------------
 
-service InformanteFulcrum {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
-  rpc AddCity(Estructura) returns (Vector) {}
-}
+//service InformanteFulcrum {  //Servicios relacionados a Informantes(cliente) - Broker(servidor)
+  //rpc AddCity(Estructura) returns (Vector) {}
+//}
 
 message Estructura {
   string planeta = 1;
@@ -51,3 +61,4 @@ message Vector{
   string z = 3;
 }
 //------------------------------------------------------------------------------
+

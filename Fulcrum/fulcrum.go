@@ -12,7 +12,7 @@ import (
 )
 
 type Server2 struct {
-	pb.UnimplementedInformanteFulcrumServer
+	pb.UnimplementedBrokerServer
 }
 
 /*
@@ -63,7 +63,7 @@ func main() {
 
 	ahsoka := grpc.NewServer()
 
-	pb.RegisterInformanteFulcrumServer(ahsoka, &Server2{})
+	pb.RegisterBrokerServer(ahsoka, &Server2{})
 	if err := ahsoka.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
 	}

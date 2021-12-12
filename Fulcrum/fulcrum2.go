@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"io/ioutill"
 	"log"
 	"net"
-	//"os"
 
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
@@ -15,23 +15,19 @@ type Server3 struct {
 	pb.UnimplementedInformanteFulcrumServer
 }
 
-/*
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor int) {
-	file, err := os.Open(nombre_planeta + ".txt")
-	if err != nil {
-		file, err := os.Create(nombre_planeta + ".txt")
-		if err != nil {
-			log.Fatal(err)
-		}
+	content,err:=ioutill.ReadFile(filename:nombre_planeta+".txt")
+	if err!=nil{
+		err2:=ioutill.WriteFile(nombre_planeta+".txt",nombre_planeta+" "+nombre_ciudad+" "+nuevo_valor,0644)
 	}
-	defer file.Close()
-	_, err2 := file.WriteString(nombre_planeta + " " + nombre_ciudad + " " + nuevo_valor + "/n")
-	if err2 != nil {
-		log.Fatal(err2)
+	content=append(content,nombre_planeta+" "+nombre_ciudad+" "+nuevo_valor)
+	err=ioutill.WriteFile(nombre_planeta+".txt",content,0644)
+	if err!=nil{
+		log.Fatal(err)
 	}
-	//fmt.Println("listo")
 }
 
+/*
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
 	file, err := os.Open(nombre_planeta + "txt")
 	if err != nil {
@@ -64,7 +60,7 @@ func main() {
 
 	ahsoka1 := grpc.NewServer()
 
-	pb.RegisterInformanteFulcrumServer(ahsoka1, &Server3{})
+	pb.RegisterBrokerServer(ahsoka1, &Server3{})
 	if err := ahsoka1.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
 	}

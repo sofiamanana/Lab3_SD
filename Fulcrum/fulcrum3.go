@@ -12,7 +12,15 @@ import (
 )
 
 type Server4 struct {
-	pb.UnimplementedInformanteFulcrumServer
+	pb.UnimplementedBrokerServer
+}
+
+func (s *Server) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
+	split := strings.Split(in.Body, ",")
+	planeta := split[0]
+	ciudad := split[1]
+	log.Printf("Broker pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
+	return &pb.Numero{Num: 5}, nil
 }
 
 /*
@@ -56,15 +64,15 @@ func (ahsoka2 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 
 func main() {
 	//Conexión a Informante Ahsoka
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9070))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
 	ahsoka2 := grpc.NewServer()
 
-	pb.RegisterInformanteFulcrumServer(ahsoka2, &Server4{})
+	pb.RegisterBrokerServer(ahsoka2, &Server4{})
 	if err := ahsoka2.Serve(lis); err != nil {
-		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
+		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
 	}
 }

@@ -13,11 +13,7 @@ import (
 )
 
 type Server struct {
-	pb.UnimplementedNumberRebelsServer
-}
-
-type Server1 struct {
-	pb.UnimplementedInformanteBrokerServer
+	pb.UnimplementedBrokerServer
 }
 
 func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
@@ -25,26 +21,24 @@ func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb
 	planeta := split[0]
 	ciudad := split[1]
 	log.Printf("Leia pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
-	return &pb.Numero{Num: 11}, nil
-}
 
-func ServerLeia() {
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9000))
+	var conn *grpc.ClientConn
+	conn, err := grpc.Dial("10.6.40.171:9040", grpc.WithInsecure())
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatalf("did not connect: %s", err)
+	}
+	defer conn.Close()
+
+	c := pb.NewFulcrumClient(conn)
+	response, err := c.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
+	if err != nil {
+		log.Fatalf("Error when calling SayHello: %s", err)
 	}
 
-	s := grpc.NewServer()
-
-	pb.RegisterNumberRebelsServer(s, &Server{})
-
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %s", err)
-	}
-
+	return &pb.Numero{Num: response.Num}, nil
 }
 
-func (inf *Server1) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) {
+func (inf *Server) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) {
 	var fulcrum int32 = 0
 	var ip string
 	log.Printf("El informante desea hacer: %s", in.Comando)
@@ -69,7 +63,7 @@ func ServerInformante() { //Conexión para conectar este broker (servidor) al in
 
 	inf := grpc.NewServer()
 
-	pb.RegisterInformanteBrokerServer(inf, &Server1{})
+	pb.RegisterBrokerServer(inf, &Server1{})
 	if err := inf.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-broker: %s", err)
 	}

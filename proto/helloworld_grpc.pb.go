@@ -14,258 +14,244 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// NumberRebelsClient is the client API for NumberRebels service.
+// BrokerClient is the client API for Broker service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type NumberRebelsClient interface {
+type BrokerClient interface {
 	GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
+	QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error)
+	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 }
 
-type numberRebelsClient struct {
+type brokerClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewNumberRebelsClient(cc grpc.ClientConnInterface) NumberRebelsClient {
-	return &numberRebelsClient{cc}
+func NewBrokerClient(cc grpc.ClientConnInterface) BrokerClient {
+	return &brokerClient{cc}
 }
 
-func (c *numberRebelsClient) GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
+func (c *brokerClient) GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
 	out := new(Numero)
-	err := c.cc.Invoke(ctx, "/helloworld.NumberRebels/GetNumberRebels", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.Broker/GetNumberRebels", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// NumberRebelsServer is the server API for NumberRebels service.
-// All implementations must embed UnimplementedNumberRebelsServer
+func (c *brokerClient) QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error) {
+	out := new(Redirigido)
+	err := c.cc.Invoke(ctx, "/helloworld.Broker/QuieroHacer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *brokerClient) AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
+	out := new(Vector)
+	err := c.cc.Invoke(ctx, "/helloworld.Broker/AddCity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// BrokerServer is the server API for Broker service.
+// All implementations must embed UnimplementedBrokerServer
 // for forward compatibility
-type NumberRebelsServer interface {
+type BrokerServer interface {
 	GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error)
-	mustEmbedUnimplementedNumberRebelsServer()
+	QuieroHacer(context.Context, *Comando) (*Redirigido, error)
+	AddCity(context.Context, *Estructura) (*Vector, error)
+	mustEmbedUnimplementedBrokerServer()
 }
 
-// UnimplementedNumberRebelsServer must be embedded to have forward compatible implementations.
-type UnimplementedNumberRebelsServer struct {
+// UnimplementedBrokerServer must be embedded to have forward compatible implementations.
+type UnimplementedBrokerServer struct {
 }
 
-func (UnimplementedNumberRebelsServer) GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error) {
+func (UnimplementedBrokerServer) GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNumberRebels not implemented")
 }
-func (UnimplementedNumberRebelsServer) mustEmbedUnimplementedNumberRebelsServer() {}
+func (UnimplementedBrokerServer) QuieroHacer(context.Context, *Comando) (*Redirigido, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QuieroHacer not implemented")
+}
+func (UnimplementedBrokerServer) AddCity(context.Context, *Estructura) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
+}
+func (UnimplementedBrokerServer) mustEmbedUnimplementedBrokerServer() {}
 
-// UnsafeNumberRebelsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to NumberRebelsServer will
+// UnsafeBrokerServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to BrokerServer will
 // result in compilation errors.
-type UnsafeNumberRebelsServer interface {
-	mustEmbedUnimplementedNumberRebelsServer()
+type UnsafeBrokerServer interface {
+	mustEmbedUnimplementedBrokerServer()
 }
 
-func RegisterNumberRebelsServer(s grpc.ServiceRegistrar, srv NumberRebelsServer) {
-	s.RegisterService(&NumberRebels_ServiceDesc, srv)
+func RegisterBrokerServer(s grpc.ServiceRegistrar, srv BrokerServer) {
+	s.RegisterService(&Broker_ServiceDesc, srv)
 }
 
-func _NumberRebels_GetNumberRebels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Broker_GetNumberRebels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PlanetaCiudad)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NumberRebelsServer).GetNumberRebels(ctx, in)
+		return srv.(BrokerServer).GetNumberRebels(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/helloworld.NumberRebels/GetNumberRebels",
+		FullMethod: "/helloworld.Broker/GetNumberRebels",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NumberRebelsServer).GetNumberRebels(ctx, req.(*PlanetaCiudad))
+		return srv.(BrokerServer).GetNumberRebels(ctx, req.(*PlanetaCiudad))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// NumberRebels_ServiceDesc is the grpc.ServiceDesc for NumberRebels service.
-// It's only intended for direct use with grpc.RegisterService,
-// and not to be introspected or modified (even as a copy)
-var NumberRebels_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "helloworld.NumberRebels",
-	HandlerType: (*NumberRebelsServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "GetNumberRebels",
-			Handler:    _NumberRebels_GetNumberRebels_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/helloworld.proto",
-}
-
-// InformanteBrokerClient is the client API for InformanteBroker service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type InformanteBrokerClient interface {
-	QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error)
-}
-
-type informanteBrokerClient struct {
-	cc grpc.ClientConnInterface
-}
-
-func NewInformanteBrokerClient(cc grpc.ClientConnInterface) InformanteBrokerClient {
-	return &informanteBrokerClient{cc}
-}
-
-func (c *informanteBrokerClient) QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error) {
-	out := new(Redirigido)
-	err := c.cc.Invoke(ctx, "/helloworld.InformanteBroker/QuieroHacer", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// InformanteBrokerServer is the server API for InformanteBroker service.
-// All implementations must embed UnimplementedInformanteBrokerServer
-// for forward compatibility
-type InformanteBrokerServer interface {
-	QuieroHacer(context.Context, *Comando) (*Redirigido, error)
-	mustEmbedUnimplementedInformanteBrokerServer()
-}
-
-// UnimplementedInformanteBrokerServer must be embedded to have forward compatible implementations.
-type UnimplementedInformanteBrokerServer struct {
-}
-
-func (UnimplementedInformanteBrokerServer) QuieroHacer(context.Context, *Comando) (*Redirigido, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method QuieroHacer not implemented")
-}
-func (UnimplementedInformanteBrokerServer) mustEmbedUnimplementedInformanteBrokerServer() {}
-
-// UnsafeInformanteBrokerServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to InformanteBrokerServer will
-// result in compilation errors.
-type UnsafeInformanteBrokerServer interface {
-	mustEmbedUnimplementedInformanteBrokerServer()
-}
-
-func RegisterInformanteBrokerServer(s grpc.ServiceRegistrar, srv InformanteBrokerServer) {
-	s.RegisterService(&InformanteBroker_ServiceDesc, srv)
-}
-
-func _InformanteBroker_QuieroHacer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Broker_QuieroHacer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Comando)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformanteBrokerServer).QuieroHacer(ctx, in)
+		return srv.(BrokerServer).QuieroHacer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/helloworld.InformanteBroker/QuieroHacer",
+		FullMethod: "/helloworld.Broker/QuieroHacer",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformanteBrokerServer).QuieroHacer(ctx, req.(*Comando))
+		return srv.(BrokerServer).QuieroHacer(ctx, req.(*Comando))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// InformanteBroker_ServiceDesc is the grpc.ServiceDesc for InformanteBroker service.
+func _Broker_AddCity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Estructura)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BrokerServer).AddCity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.Broker/AddCity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BrokerServer).AddCity(ctx, req.(*Estructura))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// Broker_ServiceDesc is the grpc.ServiceDesc for Broker service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var InformanteBroker_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "helloworld.InformanteBroker",
-	HandlerType: (*InformanteBrokerServer)(nil),
+var Broker_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.Broker",
+	HandlerType: (*BrokerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetNumberRebels",
+			Handler:    _Broker_GetNumberRebels_Handler,
+		},
+		{
 			MethodName: "QuieroHacer",
-			Handler:    _InformanteBroker_QuieroHacer_Handler,
+			Handler:    _Broker_QuieroHacer_Handler,
+		},
+		{
+			MethodName: "AddCity",
+			Handler:    _Broker_AddCity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/helloworld.proto",
 }
 
-// InformanteFulcrumClient is the client API for InformanteFulcrum service.
+// FulcrumClient is the client API for Fulcrum service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type InformanteFulcrumClient interface {
-	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
+type FulcrumClient interface {
+	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
 }
 
-type informanteFulcrumClient struct {
+type fulcrumClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewInformanteFulcrumClient(cc grpc.ClientConnInterface) InformanteFulcrumClient {
-	return &informanteFulcrumClient{cc}
+func NewFulcrumClient(cc grpc.ClientConnInterface) FulcrumClient {
+	return &fulcrumClient{cc}
 }
 
-func (c *informanteFulcrumClient) AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
-	out := new(Vector)
-	err := c.cc.Invoke(ctx, "/helloworld.InformanteFulcrum/AddCity", in, out, opts...)
+func (c *fulcrumClient) PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
+	out := new(Numero)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/PreguntarInformantes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// InformanteFulcrumServer is the server API for InformanteFulcrum service.
-// All implementations must embed UnimplementedInformanteFulcrumServer
+// FulcrumServer is the server API for Fulcrum service.
+// All implementations must embed UnimplementedFulcrumServer
 // for forward compatibility
-type InformanteFulcrumServer interface {
-	AddCity(context.Context, *Estructura) (*Vector, error)
-	mustEmbedUnimplementedInformanteFulcrumServer()
+type FulcrumServer interface {
+	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error)
+	mustEmbedUnimplementedFulcrumServer()
 }
 
-// UnimplementedInformanteFulcrumServer must be embedded to have forward compatible implementations.
-type UnimplementedInformanteFulcrumServer struct {
+// UnimplementedFulcrumServer must be embedded to have forward compatible implementations.
+type UnimplementedFulcrumServer struct {
 }
 
-func (UnimplementedInformanteFulcrumServer) AddCity(context.Context, *Estructura) (*Vector, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
+func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreguntarInformantes not implemented")
 }
-func (UnimplementedInformanteFulcrumServer) mustEmbedUnimplementedInformanteFulcrumServer() {}
+func (UnimplementedFulcrumServer) mustEmbedUnimplementedFulcrumServer() {}
 
-// UnsafeInformanteFulcrumServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to InformanteFulcrumServer will
+// UnsafeFulcrumServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to FulcrumServer will
 // result in compilation errors.
-type UnsafeInformanteFulcrumServer interface {
-	mustEmbedUnimplementedInformanteFulcrumServer()
+type UnsafeFulcrumServer interface {
+	mustEmbedUnimplementedFulcrumServer()
 }
 
-func RegisterInformanteFulcrumServer(s grpc.ServiceRegistrar, srv InformanteFulcrumServer) {
-	s.RegisterService(&InformanteFulcrum_ServiceDesc, srv)
+func RegisterFulcrumServer(s grpc.ServiceRegistrar, srv FulcrumServer) {
+	s.RegisterService(&Fulcrum_ServiceDesc, srv)
 }
 
-func _InformanteFulcrum_AddCity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura)
+func _Fulcrum_PreguntarInformantes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlanetaCiudad)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InformanteFulcrumServer).AddCity(ctx, in)
+		return srv.(FulcrumServer).PreguntarInformantes(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/helloworld.InformanteFulcrum/AddCity",
+		FullMethod: "/helloworld.Fulcrum/PreguntarInformantes",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InformanteFulcrumServer).AddCity(ctx, req.(*Estructura))
+		return srv.(FulcrumServer).PreguntarInformantes(ctx, req.(*PlanetaCiudad))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// InformanteFulcrum_ServiceDesc is the grpc.ServiceDesc for InformanteFulcrum service.
+// Fulcrum_ServiceDesc is the grpc.ServiceDesc for Fulcrum service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var InformanteFulcrum_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "helloworld.InformanteFulcrum",
-	HandlerType: (*InformanteFulcrumServer)(nil),
+var Fulcrum_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "helloworld.Fulcrum",
+	HandlerType: (*FulcrumServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "AddCity",
-			Handler:    _InformanteFulcrum_AddCity_Handler,
+			MethodName: "PreguntarInformantes",
+			Handler:    _Fulcrum_PreguntarInformantes_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
