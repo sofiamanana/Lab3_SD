@@ -5,10 +5,12 @@ import (
 	"fmt"
 	"log"
 	"net"
-	//"os"
+	"os"
+	"io/ioutil"
+	"bufio"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
-	//"strings"
+	"strings"
 )
 
 var Vector = make(map[string][]int)

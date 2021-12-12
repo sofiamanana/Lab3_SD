@@ -3,13 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	//"io/ioutil"
 	"log"
 	"net"
-	//"strings"
-
+	"os"
+	"io/ioutil"
+	"bufio"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
+	"strings"
 )
 
 type Server3 struct {
