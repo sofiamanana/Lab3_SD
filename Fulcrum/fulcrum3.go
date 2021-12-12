@@ -13,7 +13,7 @@ import (
 )
 
 type Server4 struct {
-	pb.UnimplementedBrokerServer
+	pb.UnimplementedFulcrumServer
 }
 
 func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
