@@ -8,7 +8,6 @@ import (
 	"os"
 	"io/ioutil"
 	"bufio"
-	"strconv"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
 	"strings"
@@ -42,7 +41,9 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 			texto += scanner.Text() + "\n"
 		}
 	}
-	return &pb.Numero{Num: int(strconv.Atoi(rebeldes))}, nil
+	var aux int32
+	aux = int32(aux)
+	return &pb.Numero{Num: aux}, nil
 }
 
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
