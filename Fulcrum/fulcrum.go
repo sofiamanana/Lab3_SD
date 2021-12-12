@@ -157,12 +157,6 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 func main() {
 	//Conexión a Informante Ahsoka
 	Vector["Chilito"] = []int32{0,0,0}
-	for range time.Tick(time.Minute * 1) {
-		go func() {
-			//aqui meter el lock y todo lo relacionado al merge
-			fmt.Println(time.Now())
-		}()
-	}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -173,5 +167,11 @@ func main() {
 	pb.RegisterFulcrumServer(ahsoka, &Server2{})
 	if err := ahsoka.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
+	}
+	for range time.Tick(time.Minute * 1) {
+		go func() {
+			//aqui meter el lock y todo lo relacionado al merge
+			fmt.Println(time.Now())
+		}()
 	}
 }
