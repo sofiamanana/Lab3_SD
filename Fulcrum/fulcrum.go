@@ -14,7 +14,7 @@ import (
 	"strings"
 )
 
-var Vector = make(map[string][]int32)
+var Vector = make(map[string][]int64)
 
 type Server2 struct {
 	pb.UnimplementedFulcrumServer
@@ -148,7 +148,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	Vector[in.Planeta] = []int32{0,0,0}
+	Vector[in.Planeta] = []int64{0,0,0}
 	Vector[in.Planeta][0]++
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
@@ -156,7 +156,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 
 func main() {
 	//Conexión a Informante Ahsoka
-	Vector["Chilito"] = []int32{0,0,0}
+	Vector["Chilito"] = []int64{0,0,0}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
