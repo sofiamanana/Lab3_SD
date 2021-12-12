@@ -13,7 +13,7 @@ import (
 	"strings"
 )
 
-var Vector = make(map[string][]int)
+var Vector = make(map[string][]int32)
 
 type Server2 struct {
 	pb.UnimplementedFulcrumServer
