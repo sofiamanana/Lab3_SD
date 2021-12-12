@@ -124,7 +124,7 @@ func main() {
 
 			}
 		} else if (opcion == 2 ) { //Actualizar ciudad
-			var planet, city, new_city string
+			//var planet, city, new_city string
 			response2, err2 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateName"})
 			if err2 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err2)
@@ -133,7 +133,7 @@ func main() {
 			//planet, city, new_city = UpdateCiudad()
 
 		} else if (opcion == 3) { //Actualizar rebeldes
-			var planet, city, new_rebeldes string
+			//var planet, city, new_rebeldes string
 			response3, err3 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateNumber"})
 			if err3 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err3)
@@ -141,7 +141,7 @@ func main() {
 			log.Printf("Respuesta del Broker: %s", response3.Valor)
 			//planet, city, new_rebeldes = UpdateRebeldes()
 		} else{
-			var planet, city string
+			//var planet, city string
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
 			if err4 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err4)
