@@ -41,6 +41,7 @@ func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor stri
 		}
 	}
 }
+
 func UpdateName(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
 	file, err := os.Open(nombre_planeta + ".txt")
 	if err != nil {
@@ -155,6 +156,12 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 func main() {
 	//Conexión a Informante Ahsoka
 	Vector["Chilito"] = []int32{0,0,0}
+	for range time.Tick(time.Minute * 1) {
+		go func() {
+			//aqui meter el lock y todo lo relacionado al merge
+			fmt.Println(time.Now())
+		}()
+	}
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
