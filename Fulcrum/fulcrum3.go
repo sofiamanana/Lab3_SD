@@ -63,6 +63,21 @@ func (ahsoka1 *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	return &pb.Vector{X: "0", Y: "0", Z: "0"}, nil
 }
 
+func ConexionLeia() {
+	//Conexión a Leia
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+
+	leia := grpc.NewServer()
+
+	pb.RegisterFulcrumServer(leia, &Server4{})
+	if err := leia.Serve(lis); err != nil {
+		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
+	}
+}
+
 func main() {
 	//Conexión a Leia
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9040))
@@ -77,16 +92,4 @@ func main() {
 		log.Fatalf("fallo la conexion informante-fulcrum: %s", err)
 	}
 
-	//Conexión a Informante Ahsoka
-	lis2, err2 := net.Listen("tcp", fmt.Sprintf(":%d", 9080))
-	if err2 != nil {
-		log.Fatalf("failed to listen: %v", err2)
-	}
-
-	ahsoka1 := grpc.NewServer()
-
-	pb.RegisterFulcrumServer(ahsoka1, &Server4{})
-	if err2 := ahsoka1.Serve(lis2); err2 != nil {
-		log.Fatalf("falló la conexión informante-fulcrum: %s", err2)
-	}
 }

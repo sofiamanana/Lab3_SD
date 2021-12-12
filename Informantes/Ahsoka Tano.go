@@ -38,7 +38,7 @@ func main() {
 	fulcrum2 := pb.NewFulcrumClient(conn2)
 
 	var conn3 *grpc.ClientConn //FULCRUM 3
-	conn3, err3 := grpc.Dial("10.6.40.171:9080", grpc.WithInsecure())
+	conn3, err3 := grpc.Dial("10.6.40.171:9040", grpc.WithInsecure())
 	if err3 != nil {
 		log.Fatalf("did not connect: %s", err3)
 	}
