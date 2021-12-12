@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func AddCiudad() (planeta string, ciudad string, rebeldes int32) {
+func AddCiudad() (planeta string, ciudad string, rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad?:\n")
@@ -29,7 +29,7 @@ func UpdateCiudad(planeta string, ciudad string, nueva_city string){
 	return
 }
 
-func UpdateRebeldes(planeta string, ciudad string, new_rebeldes int32){
+func UpdateRebeldes(planeta string, ciudad string, new_rebeldes string){
 	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿En qué ciudad?:\n")
@@ -94,14 +94,13 @@ func main() {
 	var opcion int32 = 0
 	for ok := true; ok; ok = (opcion != 5) {
 		fmt.Scan(&opcion)
-		if opcion == 1 {
+		if opcion == 1 { //Añadir ciudad
 			response, err := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "AddCity"})
 			if err != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err)
 			}
 			log.Printf("Respuesta del Broker: %s", response.Valor)
-			var planet, city string
-			var rebelds int32
+			var planet, city, rebelds string
 			planet, city, rebelds = AddCiudad()
 			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
 				res_fulcrum1, err_f1 := fulcrum1.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
@@ -124,6 +123,31 @@ func main() {
 				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
 
 			}
+		} else if (opcion == 2 ) { //Actualizar ciudad
+			var planet, city, new_city string
+			response2, err2 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateName"})
+			if err2 != nil {
+				log.Fatalf("Error when calling QuieroHacer: %s", err2)
+			}
+			log.Printf("Respuesta del Broker: %s", response2.Valor)
+			planet, city, new_city = UpdateCiudad()
+
+		} else if (opcion == 3) { //Actualizar rebeldes
+			var planet, city, new_rebeldes string
+			response3, err3 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateNumber"})
+			if err3 != nil {
+				log.Fatalf("Error when calling QuieroHacer: %s", err3)
+			}
+			log.Printf("Respuesta del Broker: %s", response3.Valor)
+			planet, city, new_rebeldes = UpdateRebeldes()
+		} else{
+			var planet, city string
+			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
+			if err4 != nil {
+				log.Fatalf("Error when calling QuieroHacer: %s", err4)
+			}
+			log.Printf("Respuesta del Broker: %s", response4.Valor)
+			planet, city = DeleteCiudad()
 		}
 	}
 
