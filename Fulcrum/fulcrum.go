@@ -102,10 +102,11 @@ func DeleteCity(nombre_planeta string, nombre_ciudad string) {
 func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
-	log.Printf("Con tantos rebeldes: %d", in.Rebeldes)
+	log.Printf("Con tantos rebeldes: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
+	Vector[in.Planeta] = []int32{0,0,0}
 	Vector[in.Planeta][0]++
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
