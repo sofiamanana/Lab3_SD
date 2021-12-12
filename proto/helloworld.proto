@@ -8,7 +8,6 @@ option go_package = "Lab3/proto";
 service Broker {
   rpc GetNumberRebels(PlanetaCiudad) returns (Numero) {}
   rpc QuieroHacer(Comando) returns (Redirigido) {}
-  rpc AddCity(Estructura) returns (Vector) {}
 }
 
 
@@ -19,6 +18,7 @@ service Broker {
 
 service Fulcrum {
   rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
+  rpc AddCity(Estructura) returns (Vector) {}
 }
 
 message PlanetaCiudad {

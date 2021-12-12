@@ -20,7 +20,6 @@ const _ = grpc.SupportPackageIsVersion7
 type BrokerClient interface {
 	GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
 	QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error)
-	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 }
 
 type brokerClient struct {
@@ -49,22 +48,12 @@ func (c *brokerClient) QuieroHacer(ctx context.Context, in *Comando, opts ...grp
 	return out, nil
 }
 
-func (c *brokerClient) AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
-	out := new(Vector)
-	err := c.cc.Invoke(ctx, "/helloworld.Broker/AddCity", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // BrokerServer is the server API for Broker service.
 // All implementations must embed UnimplementedBrokerServer
 // for forward compatibility
 type BrokerServer interface {
 	GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error)
 	QuieroHacer(context.Context, *Comando) (*Redirigido, error)
-	AddCity(context.Context, *Estructura) (*Vector, error)
 	mustEmbedUnimplementedBrokerServer()
 }
 
@@ -77,9 +66,6 @@ func (UnimplementedBrokerServer) GetNumberRebels(context.Context, *PlanetaCiudad
 }
 func (UnimplementedBrokerServer) QuieroHacer(context.Context, *Comando) (*Redirigido, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QuieroHacer not implemented")
-}
-func (UnimplementedBrokerServer) AddCity(context.Context, *Estructura) (*Vector, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
 }
 func (UnimplementedBrokerServer) mustEmbedUnimplementedBrokerServer() {}
 
@@ -130,24 +116,6 @@ func _Broker_QuieroHacer_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Broker_AddCity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BrokerServer).AddCity(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/helloworld.Broker/AddCity",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BrokerServer).AddCity(ctx, req.(*Estructura))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // Broker_ServiceDesc is the grpc.ServiceDesc for Broker service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -163,10 +131,6 @@ var Broker_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "QuieroHacer",
 			Handler:    _Broker_QuieroHacer_Handler,
 		},
-		{
-			MethodName: "AddCity",
-			Handler:    _Broker_AddCity_Handler,
-		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "proto/helloworld.proto",
@@ -177,6 +141,7 @@ var Broker_ServiceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FulcrumClient interface {
 	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
+	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 }
 
 type fulcrumClient struct {
@@ -196,11 +161,21 @@ func (c *fulcrumClient) PreguntarInformantes(ctx context.Context, in *PlanetaCiu
 	return out, nil
 }
 
+func (c *fulcrumClient) AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
+	out := new(Vector)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/AddCity", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FulcrumServer is the server API for Fulcrum service.
 // All implementations must embed UnimplementedFulcrumServer
 // for forward compatibility
 type FulcrumServer interface {
 	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error)
+	AddCity(context.Context, *Estructura) (*Vector, error)
 	mustEmbedUnimplementedFulcrumServer()
 }
 
@@ -210,6 +185,9 @@ type UnimplementedFulcrumServer struct {
 
 func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PreguntarInformantes not implemented")
+}
+func (UnimplementedFulcrumServer) AddCity(context.Context, *Estructura) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
 }
 func (UnimplementedFulcrumServer) mustEmbedUnimplementedFulcrumServer() {}
 
@@ -242,6 +220,24 @@ func _Fulcrum_PreguntarInformantes_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Fulcrum_AddCity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Estructura)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServer).AddCity(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.Fulcrum/AddCity",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServer).AddCity(ctx, req.(*Estructura))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Fulcrum_ServiceDesc is the grpc.ServiceDesc for Fulcrum service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,6 +248,10 @@ var Fulcrum_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PreguntarInformantes",
 			Handler:    _Fulcrum_PreguntarInformantes_Handler,
+		},
+		{
+			MethodName: "AddCity",
+			Handler:    _Fulcrum_AddCity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
