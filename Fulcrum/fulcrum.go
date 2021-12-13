@@ -163,11 +163,12 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 }
 
 func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
-	log.Printf("Informante desea cambiar eliminar una ciudad del planeta: %s", in.Planeta)
-	log.Printf("La a eliminar es: %s", in.Ciudad)
+	log.Printf("Informante desea cambiar el nombre de una ciudad en el planeta: %s", in.Planeta)
+	log.Printf("La ciudad a cambiar es : %s", in.Ciudad)
+	log.Printf("El nuevo nombre de la ciudad es: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	EliminarCiudad(in.Planeta, in.Ciudad)
+	ActualizarNombre(in.Planeta, in.Ciudad, in.Rebeldes)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
 	IniciarVector(in.Planeta)
