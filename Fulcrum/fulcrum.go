@@ -156,8 +156,9 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	log.Printf("Con tantos rebeldes: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	IniciarVector(in.Planeta)
+	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
+
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
