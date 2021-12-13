@@ -157,6 +157,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 func Merge(){
 	for range time.Tick(time.Minute * 1) {
 			log.Printf("Iniciando merge \n")
+			fmt.Println(time.Now())
 			//aqui meter el lock y todo lo relacionado al merge
 			//var m sync.Mutex
 			//m.Lock()
@@ -183,10 +184,10 @@ func Merge(){
 			
 
 			//m.Release()*/
-			fmt.Println(time.Now())
-		}
+			
 	}
 }
+
 
 func ConexionServer(){ //Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
