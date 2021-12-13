@@ -156,10 +156,11 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 
 func Merge(){
 	for range time.Tick(time.Minute * 1) {
+			log.Printf("Iniciando merge \n")
 			//aqui meter el lock y todo lo relacionado al merge
 			//var m sync.Mutex
 			//m.Lock()
-
+			/*
 			var conn *grpc.ClientConn
 			conn, err := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
 			if err != nil {
@@ -181,7 +182,7 @@ func Merge(){
 				}
 			
 
-			//m.Release()
+			//m.Release()*/
 			fmt.Println(time.Now())
 		}
 	}
