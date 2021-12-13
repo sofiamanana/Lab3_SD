@@ -134,20 +134,20 @@ func main() {
 			planet, city, new_city = UpdateCiudad()
 
 			if response2.Valor == "10.6.40.169" { //fulcrum1 localhots
-				res_fulcrum1, err_f1 := fulcrum1.UpdateName(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_city})
+				res_fulcrum1, err_f1 := fulcrum1.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_city})
 				if err_f1 != nil {
 					log.Fatalf("Error when calling UpdateName: %s", err_f1)
 				}
 				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
 
 			} else if response2.Valor == "10.6.40.170" { //fulcrum2
-				res_fulcrum2, err_f2 := fulcrum2.UpdateName(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_city})
+				res_fulcrum2, err_f2 := fulcrum2.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_city})
 				if err_f2 != nil {
 					log.Fatalf("Error when calling UpdateName: %s", err_f2)
 				}
 				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
 			} else { //fulcrum 3
-				res_fulcrum3, err_f3 := fulcrum3.UpdateName(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_city})
+				res_fulcrum3, err_f3 := fulcrum3.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_city})
 				if err_f3 != nil {
 					log.Fatalf("Error when calling UpdateName: %s", err_f3)
 				}
@@ -166,20 +166,20 @@ func main() {
 			planet, city, new_rebeldes = UpdateRebeldes()
 
 			if response3.Valor == "10.6.40.169" { //fulcrum1 localhots
-				res_fulcrum1, err_f1 := fulcrum1.UpdateNumber(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_rebeldes})
+				res_fulcrum1, err_f1 := fulcrum1.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_rebeldes})
 				if err_f1 != nil {
 					log.Fatalf("Error when calling UpdateNumber: %s", err_f1)
 				}
 				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
 
 			} else if response3.Valor == "10.6.40.170" { //fulcrum2
-				res_fulcrum2, err_f2 := fulcrum2.UpdateNumber(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_rebeldes})
+				res_fulcrum2, err_f2 := fulcrum2.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_rebeldes})
 				if err_f2 != nil {
 					log.Fatalf("Error when calling UpdateNumber: %s", err_f2)
 				}
 				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
 			} else { //fulcrum 3
-				res_fulcrum3, err_f3 := fulcrum3.UpdateNumber(context.Background(), &pb.Estructura2{Planeta: planet, Nom_viejo: city, Nom_nuevo: new_rebeldes})
+				res_fulcrum3, err_f3 := fulcrum3.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: new_rebeldes})
 				if err_f3 != nil {
 					log.Fatalf("Error when calling UpdateNumber: %s", err_f3)
 				}
