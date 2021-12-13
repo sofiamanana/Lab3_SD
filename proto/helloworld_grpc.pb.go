@@ -142,11 +142,9 @@ var Broker_ServiceDesc = grpc.ServiceDesc{
 type FulcrumClient interface {
 	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
 	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
-	UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
-	UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
-	Mergecito12(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
-	Mergecito23(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
-	Mergecito31(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
+	UpdateName(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error)
+	UpdateNumber(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error)
+	DeleteCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 }
 
 type fulcrumClient struct {
@@ -175,7 +173,7 @@ func (c *fulcrumClient) AddCity(ctx context.Context, in *Estructura, opts ...grp
 	return out, nil
 }
 
-func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
+func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error) {
 	out := new(Vector)
 	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/UpdateName", in, out, opts...)
 	if err != nil {
@@ -184,7 +182,7 @@ func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura, opts ...
 	return out, nil
 }
 
-func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
+func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error) {
 	out := new(Vector)
 	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/UpdateNumber", in, out, opts...)
 	if err != nil {
@@ -193,27 +191,9 @@ func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura, opts .
 	return out, nil
 }
 
-func (c *fulcrumClient) Mergecito12(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
+func (c *fulcrumClient) DeleteCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
 	out := new(Vector)
-	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito12", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fulcrumClient) Mergecito23(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
-	out := new(Vector)
-	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito23", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fulcrumClient) Mergecito31(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
-	out := new(Vector)
-	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito31", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/DeleteCity", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -226,11 +206,9 @@ func (c *fulcrumClient) Mergecito31(ctx context.Context, in *PlanetaCiudad, opts
 type FulcrumServer interface {
 	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error)
 	AddCity(context.Context, *Estructura) (*Vector, error)
-	UpdateName(context.Context, *Estructura) (*Vector, error)
-	UpdateNumber(context.Context, *Estructura) (*Vector, error)
-	Mergecito12(context.Context, *PlanetaCiudad) (*Vector, error)
-	Mergecito23(context.Context, *PlanetaCiudad) (*Vector, error)
-	Mergecito31(context.Context, *PlanetaCiudad) (*Vector, error)
+	UpdateName(context.Context, *Estructura2) (*Vector, error)
+	UpdateNumber(context.Context, *Estructura2) (*Vector, error)
+	DeleteCity(context.Context, *Estructura) (*Vector, error)
 	mustEmbedUnimplementedFulcrumServer()
 }
 
@@ -244,20 +222,14 @@ func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *Planeta
 func (UnimplementedFulcrumServer) AddCity(context.Context, *Estructura) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
 }
-func (UnimplementedFulcrumServer) UpdateName(context.Context, *Estructura) (*Vector, error) {
+func (UnimplementedFulcrumServer) UpdateName(context.Context, *Estructura2) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateName not implemented")
 }
-func (UnimplementedFulcrumServer) UpdateNumber(context.Context, *Estructura) (*Vector, error) {
+func (UnimplementedFulcrumServer) UpdateNumber(context.Context, *Estructura2) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNumber not implemented")
 }
-func (UnimplementedFulcrumServer) Mergecito12(context.Context, *PlanetaCiudad) (*Vector, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Mergecito12 not implemented")
-}
-func (UnimplementedFulcrumServer) Mergecito23(context.Context, *PlanetaCiudad) (*Vector, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Mergecito23 not implemented")
-}
-func (UnimplementedFulcrumServer) Mergecito31(context.Context, *PlanetaCiudad) (*Vector, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Mergecito31 not implemented")
+func (UnimplementedFulcrumServer) DeleteCity(context.Context, *Estructura) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCity not implemented")
 }
 func (UnimplementedFulcrumServer) mustEmbedUnimplementedFulcrumServer() {}
 
@@ -309,7 +281,7 @@ func _Fulcrum_AddCity_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _Fulcrum_UpdateName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura)
+	in := new(Estructura2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -321,13 +293,13 @@ func _Fulcrum_UpdateName_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/helloworld.Fulcrum/UpdateName",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).UpdateName(ctx, req.(*Estructura))
+		return srv.(FulcrumServer).UpdateName(ctx, req.(*Estructura2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Fulcrum_UpdateNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura)
+	in := new(Estructura2)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -339,61 +311,25 @@ func _Fulcrum_UpdateNumber_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/helloworld.Fulcrum/UpdateNumber",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).UpdateNumber(ctx, req.(*Estructura))
+		return srv.(FulcrumServer).UpdateNumber(ctx, req.(*Estructura2))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Fulcrum_Mergecito12_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlanetaCiudad)
+func _Fulcrum_DeleteCity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Estructura)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FulcrumServer).Mergecito12(ctx, in)
+		return srv.(FulcrumServer).DeleteCity(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/helloworld.Fulcrum/Mergecito12",
+		FullMethod: "/helloworld.Fulcrum/DeleteCity",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).Mergecito12(ctx, req.(*PlanetaCiudad))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Fulcrum_Mergecito23_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlanetaCiudad)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FulcrumServer).Mergecito23(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/helloworld.Fulcrum/Mergecito23",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).Mergecito23(ctx, req.(*PlanetaCiudad))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Fulcrum_Mergecito31_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PlanetaCiudad)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FulcrumServer).Mergecito31(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/helloworld.Fulcrum/Mergecito31",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).Mergecito31(ctx, req.(*PlanetaCiudad))
+		return srv.(FulcrumServer).DeleteCity(ctx, req.(*Estructura))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -422,16 +358,8 @@ var Fulcrum_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Fulcrum_UpdateNumber_Handler,
 		},
 		{
-			MethodName: "Mergecito12",
-			Handler:    _Fulcrum_Mergecito12_Handler,
-		},
-		{
-			MethodName: "Mergecito23",
-			Handler:    _Fulcrum_Mergecito23_Handler,
-		},
-		{
-			MethodName: "Mergecito31",
-			Handler:    _Fulcrum_Mergecito31_Handler,
+			MethodName: "DeleteCity",
+			Handler:    _Fulcrum_DeleteCity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

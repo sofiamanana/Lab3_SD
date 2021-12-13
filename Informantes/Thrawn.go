@@ -123,106 +123,31 @@ func main() {
 				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
 
 			}
-
-
 		} else if (opcion == 2 ) { //Actualizar ciudad
-			
+			//var planet, city, new_city string
 			response2, err2 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateName"})
 			if err2 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err2)
 			}
 			log.Printf("Respuesta del Broker: %s", response2.Valor)
-			var planet, city, new_city string
-			planet, city, new_city = UpdateCiudad()
-
-			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
-				res_fulcrum1, err_f1 := fulcrum1.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f1 != nil {
-					log.Fatalf("Error when calling UpdateName: %s", err_f1)
-				}
-				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
-
-			} else if response.Valor == "10.6.40.170" { //fulcrum2
-				res_fulcrum2, err_f2 := fulcrum2.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f2 != nil {
-					log.Fatalf("Error when calling UpdateName: %s", err_f2)
-				}
-				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
-			} else { //fulcrum 3
-				res_fulcrum3, err_f3 := fulcrum3.UpdateName(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f3 != nil {
-					log.Fatalf("Error when calling UpdateName: %s", err_f3)
-				}
-				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
-
-			}
+			//planet, city, new_city = UpdateCiudad()
 
 		} else if (opcion == 3) { //Actualizar rebeldes
-			
+			//var planet, city, new_rebeldes string
 			response3, err3 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateNumber"})
 			if err3 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err3)
 			}
 			log.Printf("Respuesta del Broker: %s", response3.Valor)
-			var planet, city, new_rebeldes string
-			planet, city, new_rebeldes = UpdateRebeldes()
-
-			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
-				res_fulcrum1, err_f1 := fulcrum1.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f1 != nil {
-					log.Fatalf("Error when calling UpdateNumber: %s", err_f1)
-				}
-				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
-
-			} else if response.Valor == "10.6.40.170" { //fulcrum2
-				res_fulcrum2, err_f2 := fulcrum2.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f2 != nil {
-					log.Fatalf("Error when calling UpdateNumber: %s", err_f2)
-				}
-				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
-			} else { //fulcrum 3
-				res_fulcrum3, err_f3 := fulcrum3.UpdateNumber(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
-				if err_f3 != nil {
-					log.Fatalf("Error when calling UpdateNumber: %s", err_f3)
-				}
-				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
-
-			}
-
-
+			//planet, city, new_rebeldes = UpdateRebeldes()
 		} else{
-			
+			//var planet, city string
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
 			if err4 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err4)
 			}
 			log.Printf("Respuesta del Broker: %s", response4.Valor)
-			var planet, city string
-			planet, city = DeleteCiudad()
-
-			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
-				res_fulcrum1, err_f1 := fulcrum1.DeleteCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city})
-				if err_f1 != nil {
-					log.Fatalf("Error when calling DeleteCity: %s", err_f1)
-				}
-				log.Printf("Respuesta del Fulcrum 1: %d", res_fulcrum1.X)
-
-			} else if response.Valor == "10.6.40.170" { //fulcrum2
-				res_fulcrum2, err_f2 := fulcrum2.DeleteCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city})
-				if err_f2 != nil {
-					log.Fatalf("Error when calling DeleteCity: %s", err_f2)
-				}
-				log.Printf("Respuesta del Fulcrum 2: %d", res_fulcrum2.X)
-			} else { //fulcrum 3
-				res_fulcrum3, err_f3 := fulcrum3.DeleteCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city})
-				if err_f3 != nil {
-					log.Fatalf("Error when calling DeleteCity: %s", err_f3)
-				}
-				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
-
-			}
-
-
+			//planet, city = DeleteCiudad()
 		}
 	}
 
