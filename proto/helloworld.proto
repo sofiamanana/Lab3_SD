@@ -35,7 +35,7 @@ service Fulcrum {
   rpc AddCity(Estructura) returns (Vector) {}
   rpc UpdateName(Estructura) returns (Vector) {}
   rpc UpdateNumber(Estructura) returns (Vector) {}
-  rpc DeleteCity(Estructura) returns (Vector) {}
+  rpc DeleteCity(Estructura3) returns (Vector) {}
   //rpc Mergecito12(PlanetaCiudad) returns(Vector) {} //arreglar
   //rpc Mergecito23(PlanetaCiudad) returns (Vector) {}
   //rpc Mergecito31(PlanetaCiudad) returns (Vector) {}
