@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func AddCiudad2() (planeta string, ciudad string, rebeldes string) {
+func AddCiudad() (planeta string, ciudad string, rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad?:\n")
@@ -19,7 +19,7 @@ func AddCiudad2() (planeta string, ciudad string, rebeldes string) {
 	return
 }
 
-func UpdateCiudad2() (planeta string, ciudad string, nueva_city string) {
+func UpdateCiudad() (planeta string, ciudad string, nueva_city string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
@@ -29,7 +29,7 @@ func UpdateCiudad2() (planeta string, ciudad string, nueva_city string) {
 	return
 }
 
-func UpdateRebeldes2() (planeta string, ciudad string, new_rebeldes string) {
+func UpdateRebeldes() (planeta string, ciudad string, new_rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿En qué ciudad?:\n")
@@ -39,7 +39,7 @@ func UpdateRebeldes2() (planeta string, ciudad string, new_rebeldes string) {
 	return
 }
 
-func DeleteCiudad2() (planeta string, ciudad string) {
+func DeleteCiudad() (planeta string, ciudad string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a eliminar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a eliminar?:\n")
@@ -100,7 +100,7 @@ func main() {
 			}
 			log.Printf("Respuesta del Broker: %s", response.Valor)
 			var planet, city, rebelds string
-			planet, city, rebelds = AddCiudad2()
+			planet, city, rebelds = AddCiudad()
 			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
 				res_fulcrum1, err_f1 := fulcrum1.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
 				if err_f1 != nil {

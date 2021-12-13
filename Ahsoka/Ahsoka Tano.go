@@ -19,7 +19,7 @@ func AddCiudad() (planeta string, ciudad string, rebeldes string) {
 	return
 }
 
-func UpdateCiudad()(planeta string, ciudad string, nueva_city string){
+func UpdateCiudad() (planeta string, ciudad string, nueva_city string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
@@ -29,7 +29,7 @@ func UpdateCiudad()(planeta string, ciudad string, nueva_city string){
 	return
 }
 
-func UpdateRebeldes()(planeta string, ciudad string, new_rebeldes string){
+func UpdateRebeldes() (planeta string, ciudad string, new_rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿En qué ciudad?:\n")
@@ -39,14 +39,13 @@ func UpdateRebeldes()(planeta string, ciudad string, new_rebeldes string){
 	return
 }
 
-func DeleteCiudad()(planeta string, ciudad string){
+func DeleteCiudad() (planeta string, ciudad string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a eliminar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a eliminar?:\n")
 	fmt.Scan(&ciudad)
 	return
 }
-
 
 func main() {
 	//--------------CONEXIONES FULCRUM ------------
@@ -124,9 +123,8 @@ func main() {
 
 			}
 
+		} else if opcion == 2 { //Actualizar ciudad
 
-		} else if (opcion == 2 ) { //Actualizar ciudad
-			
 			response2, err2 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateName"})
 			if err2 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err2)
@@ -157,8 +155,8 @@ func main() {
 
 			}
 
-		} else if (opcion == 3) { //Actualizar rebeldes
-			
+		} else if opcion == 3 { //Actualizar rebeldes
+
 			response3, err3 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateNumber"})
 			if err3 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err3)
@@ -189,9 +187,8 @@ func main() {
 
 			}
 
+		} else {
 
-		} else{
-			
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
 			if err4 != nil {
 				log.Fatalf("Error when calling QuieroHacer: %s", err4)
@@ -221,7 +218,6 @@ func main() {
 				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
 
 			}
-
 
 		}
 	}
