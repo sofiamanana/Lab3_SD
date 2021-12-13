@@ -1,13 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"context"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net"
 	"os"
-	"io/ioutil"
-	"bufio"
 	//"time"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
@@ -131,7 +131,7 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) {
 	}
 	content2, err2 := ioutil.ReadFile("Log" + nombre_planeta + ".txt")
 	if err2 != nil {
-		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad +  "\n")), 0644)
+		ioutil.WriteFile("Log"+nombre_planeta+".txt", ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + "\n")), 0644)
 	} else {
 		content2 = append(content2, ([]byte("DeleteCity " + nombre_planeta + " " + nombre_ciudad + "\n"))...)
 		err = ioutil.WriteFile("Log"+nombre_planeta+".txt", content2, 0644)
@@ -141,7 +141,6 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) {
 	}
 }
 
-
 func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
@@ -149,50 +148,48 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	Vector[in.Planeta] = []int32{0,0,0}
+	Vector[in.Planeta] = []int32{0, 0, 0}
 	Vector[in.Planeta][0]++
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
-func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura2) (*pb.Vector, error) {
+func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar eliminar una ciudad del planeta: %s", in.Planeta)
-	log.Printf("La a eliminar es: %s", in.Nom_viejo)
+	log.Printf("La a eliminar es: %s", in.Ciudad)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	EliminarCiudad(in.Planeta, in.Ciudad)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
 	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z:0}, nil
+	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura2) (*pb.Vector, error) {
+func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
-	log.Printf("El numero antiguo de rebeldes es: %s", in.Nom_viejo)
-	log.Printf("El nuevo numero es: %s", in.Nom_nuevo)
+	log.Printf("El numero antiguo de rebeldes es: %s", in.Ciudad)
+	log.Printf("El nuevo numero es: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	ActualizarNumero(in.Planeta, in.Nom_viejo, in.Nom_nuevo)
+	ActualizarNumero(in.Planeta, in.Ciudad, in.Rebeldes)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
 	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z:0}, nil
+	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
 func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
-	log.Printf("El numero antiguo de rebeldes es: %s", in.Nom_viejo)
-	log.Printf("El nuevo numero es: %s", in.Nom_nuevo)
+	log.Printf("El numero antiguo de rebeldes es: %s", in.Ciudad)
+	log.Printf("El nuevo numero es: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	ActualizarNumero(in.Planeta, in.Nom_viejo, in.Nom_nuevo)
+	ActualizarNumero(in.Planeta, in.Ciudad, in.Rebeldes)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
 	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z:0}, nil
+	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
-
-
 
 /*
 func Merge(){
@@ -202,7 +199,7 @@ func Merge(){
 			//aqui meter el lock y todo lo relacionado al merge
 			//var m sync.Mutex
 			//m.Lock()
-			
+
 			var conn *grpc.ClientConn
 			conn, err := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
 			if err != nil {
@@ -214,7 +211,7 @@ func Merge(){
 			//recorrer llaves:
 			//cada llave es un planeta
 
-			for k, v := range Vector { 
+			for k, v := range Vector {
 				//fmt.Printf("key[%s] value[%s]\n", k, v)
 				response, err := c.Mergecito12(context.Background(), &pb.PlanetaCiudad{Body: k})
 				if err != nil {
@@ -222,15 +219,15 @@ func Merge(){
 				}
 				log.Printf("Respuesta del Fulcrum 2: Vector para %s es %d, %d, %d \n",k,response.X,response.Y,response.Z)
 				}
-			
+
 
 			//m.Release()
-			
+
 	}
 }
 */
 
-func ConexionServer(){ //Conexión a Informante Ahsoka
+func ConexionServer() { //Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -246,9 +243,9 @@ func ConexionServer(){ //Conexión a Informante Ahsoka
 
 func main() {
 	//Conexión a Informante Ahsoka
-	Vector["Chilito"] = []int32{0,0,0}
+	Vector["Chilito"] = []int32{0, 0, 0}
 
 	go ConexionServer()
 	//go Merge()
-	
+
 }

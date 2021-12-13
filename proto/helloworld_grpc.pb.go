@@ -142,8 +142,8 @@ var Broker_ServiceDesc = grpc.ServiceDesc{
 type FulcrumClient interface {
 	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
 	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
-	UpdateName(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error)
-	UpdateNumber(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error)
+	UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
+	UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 	DeleteCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 }
 
@@ -173,7 +173,7 @@ func (c *fulcrumClient) AddCity(ctx context.Context, in *Estructura, opts ...grp
 	return out, nil
 }
 
-func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error) {
+func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
 	out := new(Vector)
 	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/UpdateName", in, out, opts...)
 	if err != nil {
@@ -182,7 +182,7 @@ func (c *fulcrumClient) UpdateName(ctx context.Context, in *Estructura2, opts ..
 	return out, nil
 }
 
-func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura2, opts ...grpc.CallOption) (*Vector, error) {
+func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error) {
 	out := new(Vector)
 	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/UpdateNumber", in, out, opts...)
 	if err != nil {
@@ -206,8 +206,8 @@ func (c *fulcrumClient) DeleteCity(ctx context.Context, in *Estructura, opts ...
 type FulcrumServer interface {
 	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error)
 	AddCity(context.Context, *Estructura) (*Vector, error)
-	UpdateName(context.Context, *Estructura2) (*Vector, error)
-	UpdateNumber(context.Context, *Estructura2) (*Vector, error)
+	UpdateName(context.Context, *Estructura) (*Vector, error)
+	UpdateNumber(context.Context, *Estructura) (*Vector, error)
 	DeleteCity(context.Context, *Estructura) (*Vector, error)
 	mustEmbedUnimplementedFulcrumServer()
 }
@@ -222,10 +222,10 @@ func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *Planeta
 func (UnimplementedFulcrumServer) AddCity(context.Context, *Estructura) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
 }
-func (UnimplementedFulcrumServer) UpdateName(context.Context, *Estructura2) (*Vector, error) {
+func (UnimplementedFulcrumServer) UpdateName(context.Context, *Estructura) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateName not implemented")
 }
-func (UnimplementedFulcrumServer) UpdateNumber(context.Context, *Estructura2) (*Vector, error) {
+func (UnimplementedFulcrumServer) UpdateNumber(context.Context, *Estructura) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNumber not implemented")
 }
 func (UnimplementedFulcrumServer) DeleteCity(context.Context, *Estructura) (*Vector, error) {
@@ -281,7 +281,7 @@ func _Fulcrum_AddCity_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _Fulcrum_UpdateName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura2)
+	in := new(Estructura)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -293,13 +293,13 @@ func _Fulcrum_UpdateName_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: "/helloworld.Fulcrum/UpdateName",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).UpdateName(ctx, req.(*Estructura2))
+		return srv.(FulcrumServer).UpdateName(ctx, req.(*Estructura))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Fulcrum_UpdateNumber_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Estructura2)
+	in := new(Estructura)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -311,7 +311,7 @@ func _Fulcrum_UpdateNumber_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/helloworld.Fulcrum/UpdateNumber",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FulcrumServer).UpdateNumber(ctx, req.(*Estructura2))
+		return srv.(FulcrumServer).UpdateNumber(ctx, req.(*Estructura))
 	}
 	return interceptor(ctx, in, info, handler)
 }

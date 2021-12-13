@@ -33,8 +33,8 @@ message Redirigido {  //Retornar a cual fulcrum debe conectarse
 service Fulcrum {
   rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
   rpc AddCity(Estructura) returns (Vector) {}
-  rpc UpdateName(Estructura2) returns (Vector) {}
-  rpc UpdateNumber(Estructura2) returns (Vector) {}
+  rpc UpdateName(Estructura) returns (Vector) {}
+  rpc UpdateNumber(Estructura) returns (Vector) {}
   rpc DeleteCity(Estructura) returns (Vector) {}
   //rpc Mergecito12(PlanetaCiudad) returns(Vector) {} //arreglar
   //rpc Mergecito23(PlanetaCiudad) returns (Vector) {}
@@ -47,11 +47,11 @@ message Estructura {
   string rebeldes = 3;
 }
 
-message Estructura2 {
-  string planeta = 1;
-  string nom_viejo = 2;
-  string nom_nuevo = 3;
-}
+//message Estructura2 {
+  //string planeta = 1;
+  //string nom_viejo = 2;
+  //string nom_nuevo = 3;
+//}
 
 message Estructura3 {
   string planeta = 1;
