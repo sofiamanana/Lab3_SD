@@ -176,6 +176,8 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	flag := ActualizarNombre(in.Planeta, in.Ciudad, in.Rebeldes)
 	if flag == 0 {
 		IniciarVector(in.Planeta)
+	} else {
+		Vector[in.Planeta] = []int32{0, 0, 0}
 	}
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
