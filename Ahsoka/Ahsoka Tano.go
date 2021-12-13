@@ -83,15 +83,14 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewBrokerClient(conn)
-
-	log.Printf("¿Qué acción desea realizar?:\n")
-	log.Printf("[1] Añadir una nueva ciudad.\n")
-	log.Printf("[2] Actualizar nombre ciudad.\n")
-	log.Printf("[3] Actualizar número de rebeldes de ciudad.\n")
-	log.Printf("[4] Borrar una ciudad.\n")
-	log.Printf("[5] No quiero hacer ni una wea más.\n")
 	var opcion int32 = 0
 	for ok := true; ok; ok = (opcion != 5) {
+		log.Printf("¿Qué acción desea realizar?:\n")
+		log.Printf("[1] Añadir una nueva ciudad.\n")
+		log.Printf("[2] Actualizar nombre ciudad.\n")
+		log.Printf("[3] Actualizar número de rebeldes de ciudad.\n")
+		log.Printf("[4] Borrar una ciudad.\n")
+		log.Printf("[5] No quiero hacer ni una wea más.\n")
 		fmt.Scan(&opcion)
 		if opcion == 1 { //Añadir ciudad
 			response, err := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "AddCity"})
