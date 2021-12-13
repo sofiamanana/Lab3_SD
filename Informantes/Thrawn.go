@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func AddCiudad() (planeta string, ciudad string, rebeldes string) {
+func AddCiudad2() (planeta string, ciudad string, rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad?:\n")
@@ -19,7 +19,7 @@ func AddCiudad() (planeta string, ciudad string, rebeldes string) {
 	return
 }
 
-func UpdateCiudad()(planeta string, ciudad string, nueva_city string){
+func UpdateCiudad2() (planeta string, ciudad string, nueva_city string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
@@ -29,7 +29,7 @@ func UpdateCiudad()(planeta string, ciudad string, nueva_city string){
 	return
 }
 
-func UpdateRebeldes()(planeta string, ciudad string, new_rebeldes string){
+func UpdateRebeldes2() (planeta string, ciudad string, new_rebeldes string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la cantidad de rebeldes a cambiar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿En qué ciudad?:\n")
@@ -39,14 +39,13 @@ func UpdateRebeldes()(planeta string, ciudad string, new_rebeldes string){
 	return
 }
 
-func DeleteCiudad()(planeta string, ciudad string){
+func DeleteCiudad2() (planeta string, ciudad string) {
 	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a eliminar?:\n")
 	fmt.Scan(&planeta)
 	log.Printf("¿Cuál es el nombre de la ciudad a eliminar?:\n")
 	fmt.Scan(&ciudad)
 	return
 }
-
 
 func main() {
 	//--------------CONEXIONES FULCRUM ------------
@@ -101,7 +100,7 @@ func main() {
 			}
 			log.Printf("Respuesta del Broker: %s", response.Valor)
 			var planet, city, rebelds string
-			planet, city, rebelds = AddCiudad()
+			planet, city, rebelds = AddCiudad2()
 			if response.Valor == "10.6.40.169" { //fulcrum1 localhots
 				res_fulcrum1, err_f1 := fulcrum1.AddCity(context.Background(), &pb.Estructura{Planeta: planet, Ciudad: city, Rebeldes: rebelds})
 				if err_f1 != nil {
@@ -123,7 +122,7 @@ func main() {
 				log.Printf("Respuesta del Fulcrum 3: %d", res_fulcrum3.X)
 
 			}
-		} else if (opcion == 2 ) { //Actualizar ciudad
+		} else if opcion == 2 { //Actualizar ciudad
 			//var planet, city, new_city string
 			response2, err2 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateName"})
 			if err2 != nil {
@@ -132,7 +131,7 @@ func main() {
 			log.Printf("Respuesta del Broker: %s", response2.Valor)
 			//planet, city, new_city = UpdateCiudad()
 
-		} else if (opcion == 3) { //Actualizar rebeldes
+		} else if opcion == 3 { //Actualizar rebeldes
 			//var planet, city, new_rebeldes string
 			response3, err3 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "UpdateNumber"})
 			if err3 != nil {
@@ -140,7 +139,7 @@ func main() {
 			}
 			log.Printf("Respuesta del Broker: %s", response3.Valor)
 			//planet, city, new_rebeldes = UpdateRebeldes()
-		} else{
+		} else {
 			//var planet, city string
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
 			if err4 != nil {
