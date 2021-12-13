@@ -44,10 +44,14 @@ func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor stri
 	}
 }
 
-func ActualizarNombre(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
+func ActualizarNombre(nombre_planeta string, nombre_ciudad string, nuevo_valor string) (flag int) {
 	file, err := os.Open(nombre_planeta + ".txt")
+	flag := 0
 	if err != nil {
-		log.Fatal(err)
+		//log.Fatal(err)
+		log.Printf("El archivo no existe en este Fulcrum")
+		flag := 1
+		return flag
 	}
 	defer file.Close()
 	var texto string
@@ -75,6 +79,7 @@ func ActualizarNombre(nombre_planeta string, nombre_ciudad string, nuevo_valor s
 			log.Fatal(err2)
 		}
 	}
+	return flag
 }
 
 func ActualizarNumero(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
@@ -168,10 +173,13 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	log.Printf("El nuevo nombre de la ciudad es: %s", in.Rebeldes)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	ActualizarNombre(in.Planeta, in.Ciudad, in.Rebeldes)
+	flag := ActualizarNombre(in.Planeta, in.Ciudad, in.Rebeldes)
+	if flag == 0 {
+		IniciarVector(in.Planeta)
+	}
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-	IniciarVector(in.Planeta)
+
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
