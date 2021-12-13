@@ -156,7 +156,6 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 
 func Merge(){
 	for range time.Tick(time.Minute * 1) {
-		go func() {
 			//aqui meter el lock y todo lo relacionado al merge
 			//var m sync.Mutex
 			//m.Lock()
@@ -180,11 +179,11 @@ func Merge(){
 				}
 				log.Printf("Respuesta del Fulcrum 2: Vector para %s es %d, %d, %d \n",k,response.X,response.Y,response.Z)
 				}
-			}
+			
 
 			//m.Release()
 			fmt.Println(time.Now())
-		}()
+		}
 	}
 }
 

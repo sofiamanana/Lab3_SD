@@ -151,7 +151,7 @@ func (ahsoka1 *Server3) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 
 func (ahsoka1 *Server3) Mergecito12(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Vector, error) {
 	//leer archivo
-	x,y,z := Vector[in.PlanetaCiudad]
+	x,y,z := Vector[in.Body]
 
 	return &pb.Vector{X: x, Y: y, Z: z}, nil
 }
