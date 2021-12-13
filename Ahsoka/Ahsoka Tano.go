@@ -187,7 +187,7 @@ func main() {
 
 			}
 
-		} else {
+		} else if opcion == 4 {
 
 			response4, err4 := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "DeleteCity"})
 			if err4 != nil {
