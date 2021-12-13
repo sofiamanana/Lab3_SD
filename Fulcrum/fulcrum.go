@@ -179,12 +179,11 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 }
 
 func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
-	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
-	log.Printf("El numero antiguo de rebeldes es: %s", in.Ciudad)
-	log.Printf("El nuevo numero es: %s", in.Rebeldes)
+	log.Printf("Se desea eliminar una ciudad del planeta: %s", in.Planeta)
+	log.Printf("La ciudad a eliminar es: %s", in.Ciudad)
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	ActualizarNumero(in.Planeta, in.Ciudad, in.Rebeldes)
+	EliminarCiudad(in.Planeta, in.Ciudad)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
 	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
