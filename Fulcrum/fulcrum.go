@@ -8,7 +8,7 @@ import (
 	"os"
 	"io/ioutil"
 	"bufio"
-	"time"
+	//"time"
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
 	"strings"
@@ -154,7 +154,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
-func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura2) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar eliminar una ciudad del planeta: %s", in.Planeta)
 	log.Printf("La a eliminar es: %s", in.Nom_viejo)
 	//var vector[3]int{0,0,0} ??
@@ -166,7 +166,7 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	return &pb.Vector{X: 0, Y: 0, Z:0}, nil
 }
 
-func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura2) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
 	log.Printf("El numero antiguo de rebeldes es: %s", in.Nom_viejo)
 	log.Printf("El nuevo numero es: %s", in.Nom_nuevo)
@@ -179,7 +179,7 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 	return &pb.Vector{X: 0, Y: 0, Z:0}, nil
 }
 
-func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
 	log.Printf("El numero antiguo de rebeldes es: %s", in.Nom_viejo)
 	log.Printf("El nuevo numero es: %s", in.Nom_nuevo)
