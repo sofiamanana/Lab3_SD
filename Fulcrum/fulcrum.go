@@ -142,7 +142,7 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) {
 }
 
 func IniciarVector(planeta string) {
-	file, err := os.Open(nombre_planeta + ".txt")
+	file, err := os.Open(planeta + ".txt")
 	if err != nil {
 		Vector[planeta] = []int32{0, 0, 0}
 	}
