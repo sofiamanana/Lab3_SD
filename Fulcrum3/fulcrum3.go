@@ -21,7 +21,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
-
+	var rebeldes string
 	log.Printf("Broker pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 	//leer archivo
 	file, err := os.Open(planeta + ".txt")
@@ -35,8 +35,7 @@ func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	for scanner.Scan() {
 		textarray := strings.Split(scanner.Text(), " ")
 		if textarray[1] == ciudad {
-			var rebeldes string
-			rebeldes := textarray[2]
+			rebeldes = textarray[2]
 		} else {
 			texto += scanner.Text() + "\n"
 		}
