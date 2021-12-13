@@ -244,7 +244,7 @@ func main() {
 	//Conexión a Informante Ahsoka
 	Vector["Chilito"] = []int32{0, 0, 0}
 
-	go ConexionServer()
+	ConexionServer()
 	//go Merge()
 
 }
