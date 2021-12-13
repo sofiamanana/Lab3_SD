@@ -17,10 +17,12 @@ message PlanetaCiudad {
 message Numero {
   string num = 1;
 }
+
 message Comando {
   string comando = 1;
 
 }
+
 message Redirigido {  //Retornar a cual fulcrum debe conectarse
   string valor = 1;
 }
@@ -33,8 +35,10 @@ service Fulcrum {
   rpc AddCity(Estructura) returns (Vector) {}
   rpc UpdateName(Estructura) returns (Vector) {}
   rpc UpdateNumber(Estructura) returns (Vector) {}
+  rpc Mergecito12(PlanetaCiudad) returns(Vector) {} //arreglar
+  rpc Mergecito23(PlanetaCiudad) returns (Vector) {}
+  rpc Mergecito31(PlanetaCiudad) returns (Vector) {}
 }
-
 
 message Estructura {
   string planeta = 1;

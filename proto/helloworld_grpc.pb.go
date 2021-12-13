@@ -144,6 +144,9 @@ type FulcrumClient interface {
 	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 	UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 	UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
+	Mergecito12(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
+	Mergecito23(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
+	Mergecito31(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error)
 }
 
 type fulcrumClient struct {
@@ -190,6 +193,33 @@ func (c *fulcrumClient) UpdateNumber(ctx context.Context, in *Estructura, opts .
 	return out, nil
 }
 
+func (c *fulcrumClient) Mergecito12(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
+	out := new(Vector)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito12", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fulcrumClient) Mergecito23(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
+	out := new(Vector)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito23", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fulcrumClient) Mergecito31(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vector, error) {
+	out := new(Vector)
+	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/Mergecito31", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FulcrumServer is the server API for Fulcrum service.
 // All implementations must embed UnimplementedFulcrumServer
 // for forward compatibility
@@ -198,6 +228,9 @@ type FulcrumServer interface {
 	AddCity(context.Context, *Estructura) (*Vector, error)
 	UpdateName(context.Context, *Estructura) (*Vector, error)
 	UpdateNumber(context.Context, *Estructura) (*Vector, error)
+	Mergecito12(context.Context, *PlanetaCiudad) (*Vector, error)
+	Mergecito23(context.Context, *PlanetaCiudad) (*Vector, error)
+	Mergecito31(context.Context, *PlanetaCiudad) (*Vector, error)
 	mustEmbedUnimplementedFulcrumServer()
 }
 
@@ -216,6 +249,15 @@ func (UnimplementedFulcrumServer) UpdateName(context.Context, *Estructura) (*Vec
 }
 func (UnimplementedFulcrumServer) UpdateNumber(context.Context, *Estructura) (*Vector, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNumber not implemented")
+}
+func (UnimplementedFulcrumServer) Mergecito12(context.Context, *PlanetaCiudad) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Mergecito12 not implemented")
+}
+func (UnimplementedFulcrumServer) Mergecito23(context.Context, *PlanetaCiudad) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Mergecito23 not implemented")
+}
+func (UnimplementedFulcrumServer) Mergecito31(context.Context, *PlanetaCiudad) (*Vector, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Mergecito31 not implemented")
 }
 func (UnimplementedFulcrumServer) mustEmbedUnimplementedFulcrumServer() {}
 
@@ -302,6 +344,60 @@ func _Fulcrum_UpdateNumber_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Fulcrum_Mergecito12_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlanetaCiudad)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServer).Mergecito12(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.Fulcrum/Mergecito12",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServer).Mergecito12(ctx, req.(*PlanetaCiudad))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fulcrum_Mergecito23_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlanetaCiudad)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServer).Mergecito23(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.Fulcrum/Mergecito23",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServer).Mergecito23(ctx, req.(*PlanetaCiudad))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Fulcrum_Mergecito31_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PlanetaCiudad)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServer).Mergecito31(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/helloworld.Fulcrum/Mergecito31",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServer).Mergecito31(ctx, req.(*PlanetaCiudad))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Fulcrum_ServiceDesc is the grpc.ServiceDesc for Fulcrum service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +420,18 @@ var Fulcrum_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateNumber",
 			Handler:    _Fulcrum_UpdateNumber_Handler,
+		},
+		{
+			MethodName: "Mergecito12",
+			Handler:    _Fulcrum_Mergecito12_Handler,
+		},
+		{
+			MethodName: "Mergecito23",
+			Handler:    _Fulcrum_Mergecito23_Handler,
+		},
+		{
+			MethodName: "Mergecito31",
+			Handler:    _Fulcrum_Mergecito31_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

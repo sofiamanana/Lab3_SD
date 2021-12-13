@@ -17,6 +17,8 @@ type Server4 struct {
 	pb.UnimplementedFulcrumServer
 }
 
+var Vector = make(map[string][]int32)
+
 func (s *Server4) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]

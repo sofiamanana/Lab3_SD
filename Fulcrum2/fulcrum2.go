@@ -17,6 +17,8 @@ type Server3 struct {
 	pb.UnimplementedFulcrumServer
 }
 
+var Vector = make(map[string][]int32)
+
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
 	content, err := ioutil.ReadFile("Fulcrum2/"+nombre_planeta + ".txt")
 	if err != nil {
@@ -147,6 +149,13 @@ func (ahsoka1 *Server3) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vec
 	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
+func (ahsoka1 *Server3) Mergecito12(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Vector, error) {
+	//leer archivo
+	x,y,z := Vector[in.PlanetaCiudad]
+
+	return &pb.Vector{X: x, Y: y, Z: z}, nil
+}
+
 func main() {
 	//Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9070))
@@ -160,4 +169,6 @@ func main() {
 	if err := ahsoka1.Serve(lis); err != nil {
 		log.Fatalf("falló la conexión informante-fulcrum: %s", err)
 	}
+
+
 }
