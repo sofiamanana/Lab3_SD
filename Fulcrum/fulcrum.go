@@ -12,10 +12,10 @@ import (
 	pb "Lab3_SD/proto"
 	"google.golang.org/grpc"
 	"strings"
-	"sync"
+	//"sync"
 )
 
-var Vector = make(map[string][]int)
+var Vector = make(map[string][]int32)
 
 type Server2 struct {
 	pb.UnimplementedFulcrumServer
@@ -149,7 +149,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	Vector[in.Planeta] = []int{0,0,0}
+	Vector[in.Planeta] = []int32{0,0,0}
 	Vector[in.Planeta][0]++
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
@@ -205,7 +205,7 @@ func ConexionServer(){ //Conexión a Informante Ahsoka
 
 func main() {
 	//Conexión a Informante Ahsoka
-	Vector["Chilito"] = []int{0,0,0}
+	Vector["Chilito"] = []int32{0,0,0}
 
 	go ConexionServer()
 	go Merge()
