@@ -48,9 +48,9 @@ message Estructura {
 }
 
 message Estructura2 {
-  string planeta = 1;
-  string nom_viejo = 2;
-  string nom_nuevo = 3;
+  string Planeta = 1;
+  string Nom_viejo = 2;
+  string Nom_nuevo = 3;
 }
 
 message Estructura3 {
