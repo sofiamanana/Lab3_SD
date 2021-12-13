@@ -46,11 +46,11 @@ func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor stri
 
 func ActualizarNombre(nombre_planeta string, nombre_ciudad string, nuevo_valor string) (flag int) {
 	file, err := os.Open(nombre_planeta + ".txt")
-	flag := 0
+	flag = 0
 	if err != nil {
 		//log.Fatal(err)
 		log.Printf("El archivo no existe en este Fulcrum")
-		flag := 1
+		flag = 1
 		return flag
 	}
 	defer file.Close()
