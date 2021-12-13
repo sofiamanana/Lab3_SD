@@ -141,6 +141,15 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) {
 	}
 }
 
+func IniciarVector(planeta string) {
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		Vector[planeta] = []int32{0, 0, 0}
+	}
+	defer file.Close()
+	Vector[planeta][0]++
+}
+
 func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
@@ -148,8 +157,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	Vector[in.Planeta] = []int32{0, 0, 0}
-	Vector[in.Planeta][0]++
+	IniciarVector(in.Planeta)
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
@@ -161,8 +169,9 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	EliminarCiudad(in.Planeta, in.Ciudad)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
+	IniciarVector(in.Planeta)
+	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
+	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
 func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
@@ -174,8 +183,10 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 	ActualizarNumero(in.Planeta, in.Ciudad, in.Rebeldes)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
+	IniciarVector(in.Planeta)
+	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
+
+	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
 func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
@@ -186,8 +197,9 @@ func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.
 	EliminarCiudad(in.Planeta, in.Ciudad)
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-	//return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
-	return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
+	IniciarVector(in.Planeta)
+	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
+	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
 /*
