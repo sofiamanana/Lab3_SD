@@ -15,7 +15,7 @@ import (
 	"sync"
 )
 
-var Vector = make(map[string][]int32)
+var Vector = make(map[string][]int)
 
 type Server2 struct {
 	pb.UnimplementedFulcrumServer
@@ -149,7 +149,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-	Vector[in.Planeta] = []int32{0,0,0}
+	Vector[in.Planeta] = []int{0,0,0}
 	Vector[in.Planeta][0]++
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
@@ -158,7 +158,7 @@ func Merge(){
 	for range time.Tick(time.Minute * 1) {
 		go func() {
 			//aqui meter el lock y todo lo relacionado al merge
-			var m sync.Mutex
+			//var m sync.Mutex
 			//m.Lock()
 
 			var conn *grpc.ClientConn
@@ -181,7 +181,7 @@ func Merge(){
 				log.Printf("Respuesta del Fulcrum 2: Vector para %s es %d, %d, %d \n",k,response.X,response.Y,response.Z)
 				}
 			}
-			
+
 			//m.Release()
 			fmt.Println(time.Now())
 		}()
@@ -204,7 +204,7 @@ func ConexionServer(){ //Conexión a Informante Ahsoka
 
 func main() {
 	//Conexión a Informante Ahsoka
-	Vector["Chilito"] = []int32{0,0,0}
+	Vector["Chilito"] = []int{0,0,0}
 
 	go ConexionServer()
 	go Merge()
