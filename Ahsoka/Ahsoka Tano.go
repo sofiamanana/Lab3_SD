@@ -10,21 +10,21 @@ import (
 )
 
 func AddCiudad() (planeta string, ciudad string, rebeldes string) {
-	log.Printf("¿Cuál es el nombre del planeta?:\n")
+	log.Printf("¿Cual es el nombre del planeta?:\n")
 	fmt.Scan(&planeta)
-	log.Printf("¿Cuál es el nombre de la ciudad?:\n")
+	log.Printf("¿Cual es el nombre de la ciudad?:\n")
 	fmt.Scan(&ciudad)
-	log.Printf("¿Cuántos rebeldes?:\n")
+	log.Printf("¿Cuantos rebeldes?:\n")
 	fmt.Scan(&rebeldes)
 	return
 }
 
 func UpdateCiudad() (planeta string, ciudad string, nueva_city string) {
-	log.Printf("¿Cuál es el nombre del planeta que contiene la ciudad a cambiar?:\n")
+	log.Printf("¿Cual es el nombre del planeta que contiene la ciudad a cambiar?:\n")
 	fmt.Scan(&planeta)
-	log.Printf("¿Cuál es el nombre de la ciudad a cambiar?:\n")
+	log.Printf("¿Cual es el nombre de la ciudad a cambiar?:\n")
 	fmt.Scan(&ciudad)
-	log.Printf("¿Cuál es el nuevo nombre de la ciudad a cambiar?:\n")
+	log.Printf("¿Cual es el nuevo nombre de la ciudad a cambiar?:\n")
 	fmt.Scan(&nueva_city)
 	return
 }

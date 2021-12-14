@@ -9,17 +9,24 @@ import (
 )
 
 func main() {
+	// -------- FIN CONEXIONES FULCRUM ----------------
+
+	//Comienza conexion con el broker
+	log.Printf("Informante Ahsoka Tano iniciada. \n")
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial("10.6.40.172:9050", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.6.40.172:9050", grpc.WithInsecure()) //Conexión a Broker
 	if err != nil {
 		log.Fatalf("did not connect: %s", err)
 	}
 	defer conn.Close()
-
 	c := pb.NewBrokerClient(conn)
+	var opcion int32 = 0
+
+	
 	log.Printf("Leia Organa iniciada")
 	log.Printf("¿Qué acción desea realizar?:\n")
 	log.Printf("[1] Preguntar informacion.\n")
+	log.Printf("[2] No quiero hacer ni una wea mas.\n")
 	var opcion int32 = 0
 	for ok := true; ok; ok = (opcion != 5) {
 		fmt.Scan(&opcion)

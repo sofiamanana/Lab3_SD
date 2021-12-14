@@ -20,20 +20,54 @@ func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
+	var ful int32 = 0
 	log.Printf("Leia pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 
-	var conn *grpc.ClientConn
-	conn, err := grpc.Dial("10.6.40.171:9040", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("did not connect: %s", err)
+	var conn1 *grpc.ClientConn //FULCRUM 1
+	conn1, err1 := grpc.Dial("10.6.40.169:9060", grpc.WithInsecure())
+	if err1 != nil {
+		log.Fatalf("did not connect: %s", err1)
 	}
-	defer conn.Close()
+	defer conn1.Close()
+	fulcrum1 := pb.NewFulcrumClient(conn1)
 
-	c := pb.NewFulcrumClient(conn)
-	response, err := c.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
-	if err != nil {
-		log.Fatalf("Error when calling SayHello: %s", err)
+	var conn2 *grpc.ClientConn //FULCRUM 2
+	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
+	if err2 != nil {
+		log.Fatalf("did not connect: %s", err2)
 	}
+	defer conn2.Close()
+	fulcrum2 := pb.NewFulcrumClient(conn2)
+
+	var conn3 *grpc.ClientConn //FULCRUM 3
+	conn3, err3 := grpc.Dial("10.6.40.171:9040", grpc.WithInsecure())
+	if err3 != nil {
+		log.Fatalf("did not connect: %s", err3)
+	}
+	defer conn3.Close()
+	fulcrum3 := pb.NewFulcrumClient(conn3)
+	//tirar al azar server:
+	ful = rand.Int31n(3) + 1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
+	if ful == 1 {            //ip del dist29 10.6.40.169
+
+		response, err := fulcrum1.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
+		if err != nil {
+			log.Fatalf("Error when calling SayHello: %s", err)
+		}
+	} else if ful == 2 { //ip del dist30 10.6.40.170
+
+		response, err := fulcrum2.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
+		if err != nil {
+			log.Fatalf("Error when calling SayHello: %s", err)
+		}
+
+	} else { //ip del dist31 10.6.40.171
+		response, err := fulcrum3.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
+		if err != nil {
+			log.Fatalf("Error when calling SayHello: %s", err)
+		}
+	}
+	//----------------------------------------------------------------------------------------------------------
 
 	return &pb.Numero{Num: response.Num}, nil
 }
