@@ -20,9 +20,7 @@ func main() {
 	}
 	defer conn.Close()
 	c := pb.NewBrokerClient(conn)
-	var opcion int32 = 0
 
-	
 	log.Printf("Leia Organa iniciada")
 	log.Printf("¿Qué acción desea realizar?:\n")
 	log.Printf("[1] Preguntar informacion.\n")
@@ -35,17 +33,13 @@ func main() {
 			fmt.Scan(&planeta)
 			log.Printf("¿Ciudad?\n")
 			fmt.Scan(&ciudad)
-			str := []string{planeta,ciudad}
+			str := []string{planeta, ciudad}
 			res := strings.Join(str, ",")
 			response, err := c.GetNumberRebels(context.Background(), &pb.PlanetaCiudad{Body: res})
 			if err != nil {
 				log.Fatalf("Error when calling SayHello: %s", err)
 			}
 			log.Printf("Respuesta del Broker: %s", response.Num)
-			}
 		}
 	}
-
-
-	
 }
