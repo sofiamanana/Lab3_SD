@@ -26,12 +26,13 @@ func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	planeta := split[0]
 	ciudad := split[1]
 	var rebeldes string
+	var flag int32 = 0
 	log.Printf("Broker pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 	//leer archivo
 	file, err := os.Open(planeta + ".txt")
 	if err != nil {
-		log.Fatal(err)
-		log.Printf("No existe ese planeta\n")
+		log.Printf("El planeta no existe en este Fulcrum")
+		flag = 1
 	}
 	defer file.Close()
 	var texto string
@@ -44,6 +45,11 @@ func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 			texto += scanner.Text() + "\n"
 		}
 	}
+	if flag == 1 {
+		Vector[planeta] = []int32{0, 0, 0}
+		rebeldes = 0
+	}
+
 	return &pb.Vectorcito{X: Vector[planeta][0], Y: Vector[planeta][1], Z: Vector[planeta][2], Body: rebeldes}, nil
 }
 
