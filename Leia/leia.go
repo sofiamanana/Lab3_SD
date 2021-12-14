@@ -43,7 +43,7 @@ func main() {
 
 			//Monotonic reads
 
-			if Vector[planeta] != {0,0,0,0} {
+			if Vector[planeta][0] != 0 {
 
 				response, err := c.GetNumberRebels(context.Background(), &pb.PlanetaCiudad{Body: res})
 				if err != nil {
