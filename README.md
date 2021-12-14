@@ -8,9 +8,9 @@
 
 
 #### Distribución de máquinas virtuales: 
-| Máquina| Asignados| Clave |
-| ----- | ---- |
-| Dist 29| Fulcrum 1, Ahsoka Tano | hZK%8XqG-?Naj!>~ |
-| Dist 30| Fulcrum 2, Almirante Thrawn | M*jvU4W;$#DZs_5, |
-| Dist 31| Fulcrum 3, Leia Organa | A3h!)7czKgsu{?GC |
-| Dist 32| Broker Mos Eisley | a7+VT<<F^*8mLvjX] > |
+| Máquina| Asignados| Claves|
+| ----- | ---- | ---- |
+| Dist 29| Fulcrum 1, Ahsoka Tano | a|
+| Dist 30| Fulcrum 2, Almirante Thrawn | a|
+| Dist 31| Fulcrum 3, Leia Organa | a|
+| Dist 32| Broker Mos Eisley| a|
