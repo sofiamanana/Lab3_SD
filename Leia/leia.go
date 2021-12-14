@@ -64,7 +64,7 @@ func main() {
 					}
 				}
 
-				log.Printf("En el planeta %s hay %s rebeldes", planeta, response.Body)
+				log.Printf("En el planeta %s hay %s rebeldes", planeta, rebeldes)
 
 			} else {
 				response, err := c.GetNumberRebels(context.Background(), &pb.PlanetaCiudad{Body: res})

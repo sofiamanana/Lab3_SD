@@ -263,7 +263,7 @@ func Merge(){
 	for range time.Tick(time.Minute * 1) {
 			log.Printf("Iniciando merge \n")
 			fmt.Println(time.Now())
-			//aqui meter el lock y todo lo relacionado al merge
+			//aqui meter el lock y todo lo relaciongado al merge
 			//var m sync.Mutex
 			//m.Lock()
 
