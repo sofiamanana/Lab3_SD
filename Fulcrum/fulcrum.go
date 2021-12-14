@@ -307,7 +307,7 @@ func main() {
 	log.Printf("Iniciando Fulcrum 1")
 	Vector["Chilito"] = []int32{0, 0, 0}
 
-	ConexionServer()
+	go ConexionServer()
 	go Merge()
 
 }
