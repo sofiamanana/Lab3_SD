@@ -43,7 +43,7 @@ func main() {
 
 			//Monotonic reads
 
-			if Vector[planeta] != 0 {
+			if Vector[planeta] != {0,0,0,0} {
 
 				response, err := c.GetNumberRebels(context.Background(), &pb.PlanetaCiudad{Body: res})
 				if err != nil {
@@ -51,15 +51,15 @@ func main() {
 				}
 				ip = response.Ip
 				if ip == "10.6.40.169" {
-					if Vector[planeta][1] < in.X {
+					if Vector[planeta][1] < response.X {
 						rebeldes = response.Body
 					}
 				} else if ip == "10.6.40.170" {
-					if Vector[planeta][2] < in.X {
+					if Vector[planeta][2] < response.X {
 						rebeldes = response.Body
 					}
 				} else {
-					if Vector[planeta][3] < in.X {
+					if Vector[planeta][3] < response.X {
 						rebeldes = response.Body
 					}
 				}
