@@ -47,7 +47,7 @@ func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 	}
 	if flag == 1 {
 		Vector[planeta] = []int32{0, 0, 0}
-		rebeldes = 0
+		rebeldes = "0"
 	}
 
 	return &pb.Vectorcito{X: Vector[planeta][0], Y: Vector[planeta][1], Z: Vector[planeta][2], Body: rebeldes}, nil
