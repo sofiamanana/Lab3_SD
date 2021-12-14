@@ -75,7 +75,7 @@ func main() {
 	// -------- FIN CONEXIONES FULCRUM ----------------
 
 	//Comienza conexion con el broker
-	log.Printf("Informante Ahsoka Tano iniciada. \n")
+	log.Printf("Informante Almirante Thrawn iniciado. \n")
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial("10.6.40.172:9050", grpc.WithInsecure()) //Conexión a Broker
 	if err != nil {

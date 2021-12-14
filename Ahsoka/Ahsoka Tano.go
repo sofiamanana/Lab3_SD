@@ -90,7 +90,7 @@ func main() {
 		log.Printf("[2] Actualizar nombre ciudad.\n")
 		log.Printf("[3] Actualizar número de rebeldes de ciudad.\n")
 		log.Printf("[4] Borrar una ciudad.\n")
-		log.Printf("[5] No quiero hacer ni una wea más.\n")
+		log.Printf("[5] No quiero hacer nada más.\n")
 		fmt.Scan(&opcion)
 		if opcion == 1 { //Añadir ciudad
 			response, err := c.QuieroHacer(context.Background(), &pb.Comando{Comando: "AddCity"})

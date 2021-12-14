@@ -135,6 +135,7 @@ func ServerInformante() { //Conexión para conectar este broker (servidor) al in
 }
 
 func main() {
+	log.Printf("Servidor Broker iniciado. \n")
 	rand.Seed(time.Now().UnixNano()) //para seleccionar el server fulcrum al azar
 	ServerInformante()
 }

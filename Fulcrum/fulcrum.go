@@ -187,7 +187,7 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int) {
 	return flag
 }
 
-func LeerArchivo(nombre_planeta string){
+func LeerArchivo(nombre_planeta string) {
 	file, err := os.Open(nombre_planeta + ".txt")
 	var textarray []string
 	if err != nil {
@@ -199,7 +199,7 @@ func LeerArchivo(nombre_planeta string){
 	for scanner.Scan() {
 		textarray = strings.Split(scanner.Text(), " ")
 	}
-	log.Printf("%s\n",textarray)
+	log.Printf("%s\n", textarray)
 }
 
 func IniciarVector(planeta string) {
@@ -288,7 +288,6 @@ func Merge(){
 }
 */
 
-
 func ConexionServer() { //Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
 	if err != nil {
@@ -305,7 +304,7 @@ func ConexionServer() { //Conexión a Informante Ahsoka
 
 func main() {
 	//Conexión a Informante Ahsoka
-	log.Printf("Iniciando Fulcrum 1")
+	log.Printf("Fulcrum 1 iniciado. \n")
 	Vector["Chilito"] = []int32{0, 0, 0}
 
 	ConexionServer()

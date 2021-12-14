@@ -15,7 +15,7 @@ func main() {
 	// -------- FIN CONEXIONES FULCRUM ----------------
 
 	//Comienza conexion con el broker
-	log.Printf("Informante Ahsoka Tano iniciada. \n")
+	log.Printf("Leia Organa iniciada. \n")
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial("10.6.40.172:9050", grpc.WithInsecure()) //Conexión a Broker
 	if err != nil {
@@ -30,7 +30,7 @@ func main() {
 		log.Printf("Leia Organa iniciada")
 		log.Printf("¿Qué acción desea realizar?:\n")
 		log.Printf("[1] Preguntar informacion.\n")
-		log.Printf("[2] No quiero hacer ni una wea mas.\n")
+		log.Printf("[2] No quiero hacer nada más.\n")
 		fmt.Scan(&opcion)
 		if opcion == 1 {
 			log.Printf("¿Planeta?\n")
