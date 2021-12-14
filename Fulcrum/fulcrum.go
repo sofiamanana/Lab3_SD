@@ -189,6 +189,7 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int) {
 
 func LeerArchivo(nombre_planeta string){
 	file, err := os.Open(nombre_planeta + ".txt")
+	var textarray string
 	if err != nil {
 		//log.Fatal(err)
 		log.Printf("El planeta no existe en este Fulcrum")
