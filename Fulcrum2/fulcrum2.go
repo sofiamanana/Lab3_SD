@@ -21,7 +21,7 @@ type Server2 struct {
 	pb.UnimplementedFulcrumServer
 }
 
-func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
+func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Vectorcito, error) {
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
@@ -44,7 +44,7 @@ func (s *Server2) PreguntarInformantes(ctx context.Context, in *pb.PlanetaCiudad
 			texto += scanner.Text() + "\n"
 		}
 	}
-	return &pb.Numero{Num: rebeldes}, nil
+	return &pb.Vectorcito{X: Vector[planeta][0], Y: Vector[planeta][1], Z: Vector[planeta][2], Body: rebeldes}, nil
 }
 
 func AgregarCiudad(nombre_planeta string, nombre_ciudad string, nuevo_valor string) {
@@ -269,7 +269,7 @@ func Merge(){
 
 			var conn *grpc.ClientConn
 			conn, err := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
-			if err != tgnil {
+			if err != nil {
 				log.Fatalf("did not connect: %s", err)
 			}
 			defer conn.Close()

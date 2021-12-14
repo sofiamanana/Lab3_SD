@@ -6,7 +6,7 @@ package helloworld;
 option go_package = "Lab3/proto";
 
 service Broker {
-  rpc GetNumberRebels(PlanetaCiudad) returns (Numero) {}
+  rpc GetNumberRebels(PlanetaCiudad) returns (Vect) {}
   rpc QuieroHacer(Comando) returns (Redirigido) {}
 }
 
@@ -31,7 +31,7 @@ message Redirigido {  //Retornar a cual fulcrum debe conectarse
 //------------------------------------------------------------------
 
 service Fulcrum {
-  rpc PreguntarInformantes(PlanetaCiudad) returns (Numero) {}
+  rpc PreguntarInformantes(PlanetaCiudad) returns (Vectorcito) {}
   rpc AddCity(Estructura) returns (Vector) {}
   rpc UpdateName(Estructura) returns (Vector) {}
   rpc UpdateNumber(Estructura) returns (Vector) {}
@@ -39,6 +39,21 @@ service Fulcrum {
   //rpc Mergecito12(PlanetaCiudad) returns(Vector) {} //arreglar
   //rpc Mergecito23(PlanetaCiudad) returns (Vector) {}
   //rpc Mergecito31(PlanetaCiudad) returns (Vector) {}
+}
+
+message Vectorcito {
+  int32 x = 1;
+  int32 y = 2;
+  int32 z = 3;
+  string body = 4;
+}
+
+message Vect {
+  int32 x = 1;
+  int32 y = 2;
+  int32 z = 3;
+  string body = 4;
+  string ip = 5;
 }
 
 message Estructura {

@@ -67,26 +67,30 @@ func IrFulcrum3(planetaciudad string) (retorno string) {
 	return retorno
 }
 
-func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Numero, error) {
+func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Vect, error) {
 	split := strings.Split(in.Body, ",")
 	planeta := split[0]
 	ciudad := split[1]
+	var ip string
 	var numero string
 	var ful int32 = 0
 	log.Printf("Leia pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 
 	//tirar al azar server:
 	ful = rand.Int31n(3) + 1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
-	if ful == 1 {            //ip del dist29 10.6.40.169
+	if ful == 1 {
+		ip = "10.6.40.169" //ip del dist29 10.6.40.169
 		numero = IrFulcrum1(in.Body)
 	} else if ful == 2 { //ip del dist30 10.6.40.170
+		ip = "10.6.40.170"
 		numero = IrFulcrum2(in.Body)
 
 	} else { //ip del dist31 10.6.40.171
+		ip = "10.6.40.171"
 		numero = IrFulcrum3(in.Body)
 	}
 
-	return &pb.Numero{Num: numero}, nil
+	return &pb.Vectorcito{X: in.X, Y: in.Y, Z: in.Z, Body: in.Body, Ip: ip}, nil
 }
 
 func (inf *Server) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) {

@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BrokerClient interface {
-	GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
+	GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vect, error)
 	QuieroHacer(ctx context.Context, in *Comando, opts ...grpc.CallOption) (*Redirigido, error)
 }
 
@@ -30,8 +30,8 @@ func NewBrokerClient(cc grpc.ClientConnInterface) BrokerClient {
 	return &brokerClient{cc}
 }
 
-func (c *brokerClient) GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
-	out := new(Numero)
+func (c *brokerClient) GetNumberRebels(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vect, error) {
+	out := new(Vect)
 	err := c.cc.Invoke(ctx, "/helloworld.Broker/GetNumberRebels", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -52,7 +52,7 @@ func (c *brokerClient) QuieroHacer(ctx context.Context, in *Comando, opts ...grp
 // All implementations must embed UnimplementedBrokerServer
 // for forward compatibility
 type BrokerServer interface {
-	GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error)
+	GetNumberRebels(context.Context, *PlanetaCiudad) (*Vect, error)
 	QuieroHacer(context.Context, *Comando) (*Redirigido, error)
 	mustEmbedUnimplementedBrokerServer()
 }
@@ -61,7 +61,7 @@ type BrokerServer interface {
 type UnimplementedBrokerServer struct {
 }
 
-func (UnimplementedBrokerServer) GetNumberRebels(context.Context, *PlanetaCiudad) (*Numero, error) {
+func (UnimplementedBrokerServer) GetNumberRebels(context.Context, *PlanetaCiudad) (*Vect, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNumberRebels not implemented")
 }
 func (UnimplementedBrokerServer) QuieroHacer(context.Context, *Comando) (*Redirigido, error) {
@@ -140,7 +140,7 @@ var Broker_ServiceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type FulcrumClient interface {
-	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error)
+	PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vectorcito, error)
 	AddCity(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 	UpdateName(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
 	UpdateNumber(ctx context.Context, in *Estructura, opts ...grpc.CallOption) (*Vector, error)
@@ -155,8 +155,8 @@ func NewFulcrumClient(cc grpc.ClientConnInterface) FulcrumClient {
 	return &fulcrumClient{cc}
 }
 
-func (c *fulcrumClient) PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Numero, error) {
-	out := new(Numero)
+func (c *fulcrumClient) PreguntarInformantes(ctx context.Context, in *PlanetaCiudad, opts ...grpc.CallOption) (*Vectorcito, error) {
+	out := new(Vectorcito)
 	err := c.cc.Invoke(ctx, "/helloworld.Fulcrum/PreguntarInformantes", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -204,7 +204,7 @@ func (c *fulcrumClient) DeleteCity(ctx context.Context, in *Estructura3, opts ..
 // All implementations must embed UnimplementedFulcrumServer
 // for forward compatibility
 type FulcrumServer interface {
-	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error)
+	PreguntarInformantes(context.Context, *PlanetaCiudad) (*Vectorcito, error)
 	AddCity(context.Context, *Estructura) (*Vector, error)
 	UpdateName(context.Context, *Estructura) (*Vector, error)
 	UpdateNumber(context.Context, *Estructura) (*Vector, error)
@@ -216,7 +216,7 @@ type FulcrumServer interface {
 type UnimplementedFulcrumServer struct {
 }
 
-func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *PlanetaCiudad) (*Numero, error) {
+func (UnimplementedFulcrumServer) PreguntarInformantes(context.Context, *PlanetaCiudad) (*Vectorcito, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PreguntarInformantes not implemented")
 }
 func (UnimplementedFulcrumServer) AddCity(context.Context, *Estructura) (*Vector, error) {
