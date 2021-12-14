@@ -304,9 +304,11 @@ func ConexionServer() { //Conexión a Informante Ahsoka
 
 func main() {
 	//Conexión a Informante Ahsoka
+	log.Printf("Iniciando Fulcrum 1")
 	Vector["Chilito"] = []int32{0, 0, 0}
 
 	ConexionServer()
+	Merge()
 	//go Merge()
 
 }
