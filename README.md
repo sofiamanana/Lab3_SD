@@ -7,9 +7,10 @@
 - Sofia Mañana 201804535-7 Paralelo 201
 
 
-| Máquina| Asignados|
+#### Distribución de máquinas virtuales: 
+| Máquina| Asignados| Clave |
 | ----- | ---- |
-| Dist 29| Fulcrum 1, Ahsoka Tano |
-| Dist 30| Fulcrum 2, Almirante Thrawn |
-| Dist 31| Fulcrum 3, Leia Organa |
-| Dist 32| Broker Mos Eisley|
+| Dist 29| Fulcrum 1, Ahsoka Tano | hZK%8XqG-?Naj!>~ |
+| Dist 30| Fulcrum 2, Almirante Thrawn | M*jvU4W;$#DZs_5, |
+| Dist 31| Fulcrum 3, Leia Organa | A3h!)7czKgsu{?GC |
+| Dist 32| Broker Mos Eisley | a7+VT<F^*8mLvjX]  |
