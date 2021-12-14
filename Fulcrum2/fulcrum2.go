@@ -188,6 +188,20 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int) {
 	return flag
 }
 
+func LeerArchivo(nombre_planeta string){
+	file, err := os.Open(nombre_planeta + ".txt")
+	if err != nil {
+		//log.Fatal(err)
+		log.Printf("El planeta no existe en este Fulcrum")
+	}
+	defer file.Close()
+	var texto string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		textarray := strings.Split(scanner.Text(), " ")
+	}
+}
+
 func IniciarVector(planeta string) {
 	file, err := os.Open(planeta + ".txt")
 	if err != nil {
@@ -205,7 +219,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	IniciarVector(in.Planeta)
 	AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
-
+	LeerArchivo(in.Planeta)
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
@@ -223,7 +237,7 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	}
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-
+	LeerArchivo(in.Planeta)
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
@@ -242,7 +256,7 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 	}
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-
+	LeerArchivo(in.Planeta)
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
