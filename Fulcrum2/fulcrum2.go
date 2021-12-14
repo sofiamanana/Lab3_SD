@@ -190,16 +190,17 @@ func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int) {
 
 func LeerArchivo(nombre_planeta string){
 	file, err := os.Open(nombre_planeta + ".txt")
+	var textarray []string
 	if err != nil {
 		//log.Fatal(err)
 		log.Printf("El planeta no existe en este Fulcrum")
 	}
 	defer file.Close()
-	var texto string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		textarray := strings.Split(scanner.Text(), " ")
+		textarray = strings.Split(scanner.Text(), " ")
 	}
+	log.Printf("%s\n",textarray)
 }
 
 func IniciarVector(planeta string) {
