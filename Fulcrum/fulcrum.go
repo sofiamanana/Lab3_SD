@@ -194,11 +194,11 @@ func LeerArchivo(nombre_planeta string){
 		log.Printf("El planeta no existe en este Fulcrum")
 	}
 	defer file.Close()
-	var texto string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		textarray := strings.Split(scanner.Text(), " ")
 	}
+	log.Printf("%s\n",textarray)
 }
 
 func IniciarVector(planeta string) {
@@ -282,6 +282,7 @@ func Merge(){
 	log.Printf("Iniciando Merge\n")
 	for k, v := range Vector{
 		log.Printf("key[%s]\n", k)
+		log.Printf("Vector %d, %d, %d\n", v[0],v[1],v[2])
 	}
 }
 
