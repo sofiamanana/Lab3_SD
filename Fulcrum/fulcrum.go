@@ -277,41 +277,14 @@ func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-/*
+
 func Merge(){
-	for range time.Tick(time.Minute * 1) {
-			log.Printf("Iniciando merge \n")
-			fmt.Println(time.Now())
-			//aqui meter el lock y todo lo relacionado al merge
-			//var m sync.Mutex
-			//m.Lock()
-
-			var conn *grpc.ClientConn
-			conn, err := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
-			if err != nil {
-				log.Fatalf("did not connect: %s", err)
-			}
-			defer conn.Close()
-
-			c := pb.NewFulcrumClient(conn)
-			//recorrer llaves:
-			//cada llave es un planeta
-
-			for k, v := range Vector {
-				//fmt.Printf("key[%s] value[%s]\n", k, v)
-				response, err := c.Mergecito12(context.Background(), &pb.PlanetaCiudad{Body: k})
-				if err != nil {
-					log.Fatalf("Error when calling SayHello: %s", err)
-				}
-				log.Printf("Respuesta del Fulcrum 2: Vector para %s es %d, %d, %d \n",k,response.X,response.Y,response.Z)
-				}
-
-
-			//m.Release()
-
+	log.Printf("Iniciando Merge\n")
+	for k, v := range Vector{
+		log.Printf("key[%s]\n", k)
 	}
 }
-*/
+
 
 func ConexionServer() { //Conexión a Informante Ahsoka
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 9060))
