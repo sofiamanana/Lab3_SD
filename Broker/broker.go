@@ -100,7 +100,7 @@ func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb
 		numero, X, Y, Z = IrFulcrum3(in.Body)
 	}
 
-	return &pb.Vectorcito{X: X, Y: Y, Z: Z, Body: numero, Ip: ip}, nil
+	return &pb.Vect{X: X, Y: Y, Z: Z, Body: numero, Ip: ip}, nil
 }
 
 func (inf *Server) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) {
