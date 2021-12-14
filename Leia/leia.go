@@ -1,11 +1,12 @@
 package main
 
 import (
-	"context"
-	"log"
-
 	pb "Lab3_SD/proto"
+	"context"
+	"fmt"
 	"google.golang.org/grpc"
+	"log"
+	"strings"
 )
 
 func main() {
@@ -26,6 +27,7 @@ func main() {
 	log.Printf("[1] Preguntar informacion.\n")
 	log.Printf("[2] No quiero hacer ni una wea mas.\n")
 	var opcion int32 = 0
+	var ciudad, planeta string
 	for ok := true; ok; ok = (opcion != 5) {
 		fmt.Scan(&opcion)
 		if opcion == 1 {

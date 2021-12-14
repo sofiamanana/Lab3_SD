@@ -269,7 +269,7 @@ func Merge(){
 
 			var conn *grpc.ClientConn
 			conn, err := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
-			if err != nil {
+			if err != tgnil {
 				log.Fatalf("did not connect: %s", err)
 			}
 			defer conn.Close()
