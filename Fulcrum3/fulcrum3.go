@@ -1,15 +1,15 @@
 package main
 
 import (
+	pb "Lab3_SD/proto"
+	"bufio"
 	"context"
 	"fmt"
+	"google.golang.org/grpc"
+	"io/ioutil"
 	"log"
 	"net"
 	"os"
-	"io/ioutil"
-	"bufio"
-	pb "Lab3_SD/proto"
-	"google.golang.org/grpc"
 	"strings"
 )
 
@@ -143,7 +143,7 @@ func ActualizarNumero(nombre_planeta string, nombre_ciudad string, nuevo_valor s
 	return flag
 }
 
-func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int{
+func EliminarCiudad(nombre_planeta string, nombre_ciudad string) (flag int) {
 	file, err := os.Open(nombre_planeta + ".txt")
 	flag = 0
 	if err != nil {
@@ -227,14 +227,14 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	flag := ActualizarNumero(in.Planeta, in.Ciudad, in.Rebeldes)
-	if flag == 0{
+	if flag == 0 {
 		IniciarVector(in.Planeta)
-	} else{
+	} else {
 		Vector[in.Planeta] = []int32{0, 0, 0}
 	}
 	//Vector[in.Planeta] = []int32{0,0,0}
 	//Vector[in.Planeta][0]++
-	
+
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
@@ -246,12 +246,12 @@ func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.
 	//var vector[3]int{0,0,0} ??
 	//AgregarCiudad(in.Planeta, in.Ciudad, in.Rebeldes)
 	flag := EliminarCiudad(in.Planeta, in.Ciudad)
-	if flag == 0{
+	if flag == 0 {
 		IniciarVector(in.Planeta)
-	} else{
+	} else {
 		Vector[in.Planeta] = []int32{0, 0, 0}
 	}
-	
+
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
@@ -291,7 +291,6 @@ func Merge(){
 	}
 }
 */
-
 
 func main() {
 	//Conexión a Leia
