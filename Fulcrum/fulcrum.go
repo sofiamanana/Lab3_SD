@@ -197,7 +197,7 @@ func LeerArchivo(nombre_planeta string){
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		textarray := strings.Split(scanner.Text(), " ")
+		textarray = strings.Split(scanner.Text(), " ")
 	}
 	log.Printf("%s\n",textarray)
 }
