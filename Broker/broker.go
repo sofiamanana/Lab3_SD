@@ -30,9 +30,9 @@ func IrFulcrum1(planetaciudad string) (retorno string, X int32, Y int32, Z int32
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
 	retorno = response.Body
-	X = in.X
-	Y = in.Y
-	Z = in.Z
+	X = response.X
+	Y = response.Y
+	Z = response.Z
 	return retorno, X, Y, Z
 }
 
@@ -50,9 +50,9 @@ func IrFulcrum2(planetaciudad string) (retorno string, X int32, Y int32, Z int32
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
 	retorno = response.Body
-	X = in.X
-	Y = in.Y
-	Z = in.Z
+	X = response.X
+	Y = response.Y
+	Z = response.Z
 	return retorno, X, Y, Z
 }
 
@@ -70,9 +70,9 @@ func IrFulcrum3(planetaciudad string) (retorno string, X int32, Y int32, Z int32
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
 	retorno = response.Body
-	X = in.X
-	Y = in.Y
-	Z = in.Z
+	X = response.X
+	Y = response.Y
+	Z = response.Z
 	return retorno, X, Y, Z
 }
 
