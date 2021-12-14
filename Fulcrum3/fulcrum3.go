@@ -189,7 +189,7 @@ func IniciarVector(planeta string) {
 	Vector[planeta][2]++
 }
 
-func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server4) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea crear un planeta de nombre: %s", in.Planeta)
 	log.Printf("Con ciudad de nombre: %s", in.Ciudad)
 	log.Printf("Con tantos rebeldes: %s", in.Rebeldes)
@@ -201,7 +201,7 @@ func (ahsoka *Server2) AddCity(ctx context.Context, in *pb.Estructura) (*pb.Vect
 	return &pb.Vector{X: Vector[in.Planeta][0], Y: Vector[in.Planeta][1], Z: Vector[in.Planeta][2]}, nil
 }
 
-func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server4) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar el nombre de una ciudad en el planeta: %s", in.Planeta)
 	log.Printf("La ciudad a cambiar es : %s", in.Ciudad)
 	log.Printf("El nuevo nombre de la ciudad es: %s", in.Rebeldes)
@@ -220,7 +220,7 @@ func (ahsoka *Server2) UpdateName(ctx context.Context, in *pb.Estructura) (*pb.V
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
+func (ahsoka *Server4) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb.Vector, error) {
 	log.Printf("Informante desea cambiar numero del planeta: %s", in.Planeta)
 	log.Printf("El numero antiguo de rebeldes es: %s", in.Ciudad)
 	log.Printf("El nuevo numero es: %s", in.Rebeldes)
@@ -240,7 +240,7 @@ func (ahsoka *Server2) UpdateNumber(ctx context.Context, in *pb.Estructura) (*pb
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
+func (ahsoka *Server4) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.Vector, error) {
 	log.Printf("Se desea eliminar una ciudad del planeta: %s", in.Planeta)
 	log.Printf("La ciudad a eliminar es: %s", in.Ciudad)
 	//var vector[3]int{0,0,0} ??

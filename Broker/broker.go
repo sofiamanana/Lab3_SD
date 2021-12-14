@@ -50,25 +50,19 @@ func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb
 	ful = rand.Int31n(3) + 1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
 	if ful == 1 {            //ip del dist29 10.6.40.169
 
-		response, err := fulcrum1.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
-		if err != nil {
-			log.Fatalf("Error when calling SayHello: %s", err)
-		}
+		final := fulcrum1
 	} else if ful == 2 { //ip del dist30 10.6.40.170
 
-		response, err := fulcrum2.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
-		if err != nil {
-			log.Fatalf("Error when calling SayHello: %s", err)
-		}
+		final := fulcrum2
 
 	} else { //ip del dist31 10.6.40.171
-		response, err := fulcrum3.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
-		if err != nil {
-			log.Fatalf("Error when calling SayHello: %s", err)
-		}
+		final := fulcrum3
 	}
 	//----------------------------------------------------------------------------------------------------------
-
+	response, err := final.PreguntarInformantes(context.Background(), &pb.PlanetaCiudad{Body: in.Body})
+	if err != nil {
+		log.Fatalf("Error when calling SayHello: %s", err)
+	}
 	return &pb.Numero{Num: response.Num}, nil
 }
 
