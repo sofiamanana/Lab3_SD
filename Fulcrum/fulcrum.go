@@ -308,7 +308,6 @@ func main() {
 	Vector["Chilito"] = []int32{0, 0, 0}
 
 	ConexionServer()
-	Merge()
-	//go Merge()
+	go Merge()
 
 }
