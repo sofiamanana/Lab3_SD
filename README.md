@@ -8,11 +8,7 @@
 
 
 | Máquina| Asignados|
-| ----- | ---- |
 | Dist 29| Fulcrum 1, Ahsoka Tano |
-| ----- | ---- |
 | Dist 30| Fulcrum 2, Almirante Thrawn |
-| ----- | ---- |
 | Dist 31| Fulcrum 3, Leia Organa |
-| ----- | ---- |
 | Dist 32| Broker Mos Eisley|
