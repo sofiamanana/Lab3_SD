@@ -278,7 +278,7 @@ func (ahsoka *Server2) DeleteCity(ctx context.Context, in *pb.Estructura3) (*pb.
 	//return &pb.Vector{X: 0, Y: 0, Z: 0}, nil
 }
 
-
+/*
 func Merge(){
 	log.Printf("Iniciando Merge\n")
 	for k, v := range Vector{
@@ -286,6 +286,7 @@ func Merge(){
 		log.Printf("Vector %d, %d, %d\n", v[0],v[1],v[2])
 	}
 }
+*/
 
 
 func ConexionServer() { //Conexión a Informante Ahsoka
@@ -307,7 +308,6 @@ func main() {
 	log.Printf("Iniciando Fulcrum 1")
 	Vector["Chilito"] = []int32{0, 0, 0}
 
-	go ConexionServer()
-	go Merge()
+	ConexionServer()
 
 }
