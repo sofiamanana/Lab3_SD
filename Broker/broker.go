@@ -16,7 +16,7 @@ type Server struct {
 	pb.UnimplementedBrokerServer
 }
 
-func IrFulcrum1(planetaciudad string) (retorno string) {
+func IrFulcrum1(planetaciudad string) (retorno string, X int32, Y int32, Z int32) {
 	var conn1 *grpc.ClientConn //FULCRUM 1
 	conn1, err1 := grpc.Dial("10.6.40.169:9060", grpc.WithInsecure())
 	if err1 != nil {
@@ -29,11 +29,14 @@ func IrFulcrum1(planetaciudad string) (retorno string) {
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	retorno = response.Num
-	return retorno
+	retorno = response.Body
+	X = in.X
+	Y = in.Y
+	Z = in.Z
+	return retorno, X, Y, Z
 }
 
-func IrFulcrum2(planetaciudad string) (retorno string) {
+func IrFulcrum2(planetaciudad string) (retorno string, X int32, Y int32, Z int32) {
 	var conn2 *grpc.ClientConn //FULCRUM 2
 	conn2, err2 := grpc.Dial("10.6.40.170:9070", grpc.WithInsecure())
 	if err2 != nil {
@@ -46,11 +49,14 @@ func IrFulcrum2(planetaciudad string) (retorno string) {
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	retorno = response.Num
-	return retorno
+	retorno = response.Body
+	X = in.X
+	Y = in.Y
+	Z = in.Z
+	return retorno, X, Y, Z
 }
 
-func IrFulcrum3(planetaciudad string) (retorno string) {
+func IrFulcrum3(planetaciudad string) (retorno string, X int32, Y int32, Z int32) {
 	var conn3 *grpc.ClientConn //FULCRUM 3
 	conn3, err3 := grpc.Dial("10.6.40.171:9040", grpc.WithInsecure())
 	if err3 != nil {
@@ -63,8 +69,11 @@ func IrFulcrum3(planetaciudad string) (retorno string) {
 	if err != nil {
 		log.Fatalf("Error when calling SayHello: %s", err)
 	}
-	retorno = response.Num
-	return retorno
+	retorno = response.Body
+	X = in.X
+	Y = in.Y
+	Z = in.Z
+	return retorno, X, Y, Z
 }
 
 func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb.Vect, error) {
@@ -74,23 +83,24 @@ func (s *Server) GetNumberRebels(ctx context.Context, in *pb.PlanetaCiudad) (*pb
 	var ip string
 	var numero string
 	var ful int32 = 0
+	var X, Y, Z int32
 	log.Printf("Leia pregunto por el planeta %s y la ciudad %s", planeta, ciudad)
 
 	//tirar al azar server:
 	ful = rand.Int31n(3) + 1 //Se escoge un numero al azar entre 1 y 3 (corresponden a los 3 fulcrum)
 	if ful == 1 {
 		ip = "10.6.40.169" //ip del dist29 10.6.40.169
-		numero = IrFulcrum1(in.Body)
+		numero, X, Y, Z = IrFulcrum1(in.Body)
 	} else if ful == 2 { //ip del dist30 10.6.40.170
 		ip = "10.6.40.170"
-		numero = IrFulcrum2(in.Body)
+		numero, X, Y, Z = IrFulcrum2(in.Body)
 
 	} else { //ip del dist31 10.6.40.171
 		ip = "10.6.40.171"
-		numero = IrFulcrum3(in.Body)
+		numero, X, Y, Z = IrFulcrum3(in.Body)
 	}
 
-	return &pb.Vectorcito{X: in.X, Y: in.Y, Z: in.Z, Body: in.Body, Ip: ip}, nil
+	return &pb.Vectorcito{X: X, Y: Y, Z: Z, Body: numero, Ip: ip}, nil
 }
 
 func (inf *Server) QuieroHacer(ctx context.Context, in *pb.Comando) (*pb.Redirigido, error) {
