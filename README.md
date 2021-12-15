@@ -23,7 +23,7 @@
 - En las dos siguientes, conéctese a la máquina **"dist30"**. En una de ellas, dirígase a la carpeta **"Fulcrum2"** y ejecute el archivo fulcrum2.go mediante `make Fulcrum2`. En la otra, dirígase a la carpeta **"Thrawn"** y ejecute el archivo Thrawn.go mediante `make Thrawn`.
 - En las dos siguientes, conéctese a la máquina **"dist31"**. En una de ellas, dirígase a la carpeta **"Fulcrum3"** y ejecute el archivo fulcrum3.go mediante `make Fulcrum3`. En la otra, dirígase a la carpeta **"Leia"** y ejecute el archivo leia.go mediante `make Leia`.
 - En la última terminal, debe conectarse a la máquina **"dist32"**. En ella, dirígase a la carpeta **"Broker"** y ejecute el archivo broker.go mediante `make Broker`
-- **Nota:** En cada una de las carpetas, se encontrará otro readme donde se detalla qué función cumple cada uno de los programas y cómo lo hace. En el readme de Leia se explica cómo se aplicó el Monotonic Reads.
+- **Nota:** En cada una de las carpetas, se encontrará otro readme donde se detalla qué función cumple cada uno de los programas y cómo lo hace. En el readme de Leia se explica cómo se aplicó el Monotonic Reads, mientras que en el de Ahsoka Tano se explica Read your Writes.
 
 #### Instrucciones de Uso:
 - Una vez que todas las terminales se encuentren conectadas, puede comenzar a utilizar aquellas con menú interactivo, estas son: Ahsoka (en dist29), Thrawn (en dist30) y Leia (en dist31)
